@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Visualizing the UNODC"
+date: 2011-12-06 15:24:28
+---
+
+The \[UNODC's yearly World Drug Report\](www.unodc.org/unodc/en/data-and-analysis/WDR-2011.html) is always a fun piece of data to play with. For my data journalism course, I've used some of their stats to visualize aspects of it. Below I've done a bubble chart showing consumption data. The size of the bubble shows total regional consumption, while each slice shows regional consumption of each drug. What does any of it mean? Well, two really obvious things: 1. Cannabis is the world's illicit drug of choice. 2. North America consumes way, \*way\* more drugs than anywhere else. For another, I visualized where all the opium production in Afghanistan for 2010 is located: #### Notes: * The global drug consumption visualization sses lower estimates. For a chart that displays both, see: [Global drug consumption by region 2011][1]. * Opiate estimates for Europe - where countries reported only opioid estimates - were derived by using the distribution of opiate users within the overall number of opioid users in treatment. * No data was available for the following: \* \*\*|Cocaine:\\*\* *| East Africa * Central Asia * South Asia \* \*\*|Amphetamines:\\*\* *| East Africa * North Africa * West and Central Africa * Central Asia * South Asia \* \*\*|Ecstasy:\\*\* *| East Africa * North Africa * West and Central Africa * Central Asia * South Asia * Near and Middle East * Cohorts lacking data should \*not\* be interpreted as having no users; rather, that the UNODC was not able to reliably estimate the number of users. [(Full dataset at Manyeyes)][2]
+
+ [1]: http://www-958.ibm.com/software/data/cognos/manyeyes/visualizations/global-drug-consumption-by-region
+ [2]: http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/fba0c28e0c6e11e18f0a000255111976/versions/1
