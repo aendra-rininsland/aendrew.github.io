@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com/blog/2013/04/09/migrate-wordtour-openmusicfestival">
+  <link rel="canonical" href="http://aendrew.github.io/blog/2013/04/09/migrate-wordtour-openmusicfestival">
   <link href="/favicon.png" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
 
@@ -64,7 +64,7 @@
             </ul>
             
                 <form class="search navbar-form navbar-right" action="http://google.com/search" method="GET">
-                    <input type="hidden" name="q" value="site:yoursite.com">
+                    <input type="hidden" name="q" value="site:aendrew.github.io">
                     <div class="form-group">
                         <input class="form-control" type="text" name="q" placeholder="Search">
                     </div>
@@ -111,9 +111,12 @@
   </header>
 
 
-<div class="entry-content clearfix"><p>The reason I created [OpenMusicFestival](<a href="http://www.openmusicfestival.com">http://www.openmusicfestival.com</a>) in the first place was so that I could migrate [MotionNotion.com](<a href="http://www.motionnotion.com">http://www.motionnotion.com</a>) from WordPress (And its unsupported WordTour plugin) to Drupal 7. While I suspect my original use of WordTour for a music festival was slightly weird (The system was designed for small record labels, but relationship between artists, events and venues made it work for my purposes), I&rsquo;m releasing my Artist migration class in case somebody finds it useful and wants to migrate to OpenMusicFestival. Note that this only migrates Artists — the Event and Venues parts are incomplete (On that note, if somebody wants to do those, I&rsquo;ll happily both give you credit on the project as well as include the code with OMF.). ~~~</p>
+<div class="entry-content clearfix"><p>The reason I created <a href="http://www.openmusicfestival.com">OpenMusicFestival</a> in the first place was so that I could migrate <a href="http://www.motionnotion.com">MotionNotion.com</a> from WordPress (And its unsupported WordTour plugin) to Drupal 7.</p>
 
-<p>&lt;?php
+<p>While I suspect my original use of WordTour for a music festival was slightly weird (The system was designed for small record labels, but relationship between artists, events and venues made it work for my purposes), I&rsquo;m releasing my Artist migration class in case somebody finds it useful and wants to migrate to OpenMusicFestival. Note that this only migrates Artists — the Event and Venues parts are incomplete (On that note, if somebody wants to do those, I&rsquo;ll happily both give you credit on the project as well as include the code with OMF.).</p>
+
+<p>~~~
+&lt;?php
 /<em><em>
  * @file
  *  Migrate content from WordTour (WP) to OMF (Drupal)
@@ -137,8 +140,179 @@ parent::__construct();
 // With migrate_ui enabled, migration pages will indicate people involved in
 // the particular migration, with their role and contact info. We default the
 // list in the shared class; it can be overridden for specific migrations.
-$this-&gt;team = array( new MigrateTeamMember('Ændrew Rininsland', 'aendrew@aendrew.com', t('Developer')), ); // Individual mappings in a migration can be linked to a ticket or issue // in an external tracking system. Define the URL pattern here in the shared // class with ':id:' representing the position of the issue number, then add // -&gt;issueNumber(1234) to a mapping. $this-&gt;issuePattern = 'http://drupal.org/node/:id:'; } } /\** *| There are four essential components to set up in your constructor: * $this-&gt;source - An instance of a class derived from MigrateSource, this * will feed data to the migration. * $this-&gt;destination - An instance of a class derived from MigrateDestination, * this will receive data that originated from the source and has been mapped * by the Migration class, and create Drupal objects. * $this-&gt;map - An instance of a class derived from MigrateMap, this will keep * track of which source items have been imported and what destination objects * they map to. * Mappings - Use $this-&gt;addFieldMapping to tell the Migration class what source * fields correspond to what destination fields, and additional information * associated with the mappings. */ class ArtistMigration extends WordTourMigration { public function \_\_construct() { parent::\_\_construct(); //Set up other database Database::addConnectionInfo('wp', 'default', array( 'driver' =&gt; 'mysql', 'database' =&gt; $this-&gt;wp\_db, 'username' =&gt; $this-&gt;wp\_user, 'password' =&gt; $this-&gt;wp\_pass, 'host' =&gt; $this-&gt;wp\_host, 'prefix' =&gt; $this-&gt;wp\_prefix, )); $this-&gt;description = t('Migrate the artists!'); $this-&gt;map = new MigrateSQLMap($this-&gt;machineName, array( 'artist\_id' =&gt; array( 'type' =&gt; 'int', 'length' =&gt; 7, 'not null' =&gt; TRUE, 'description' =&gt; 'Artist ID', ) ), MigrateDestinationNode::getKeySchema() ); $query = Database::getConnection('default', 'wp') -&gt;select('wtr\_artists', 'a'); $query-&gt;join('wtr\_attachment', 'at', 'a.artist\_id = at.attachment\_target\_id'); $query-&gt;join('wtr\_attachment', 'att', 'a.artist\_id = att.attachment\_target\_id'); $query-&gt;join('postmeta', 'pm', 'pm.post\_id = att.attachment\_type\_id'); $query-&gt;fields('a', array( 'artist\_id', 'artist\_name', 'artist\_publish\_date', 'artist\_bio', 'artist\_record\_company', 'artist\_social\_links', ) ); //$query-&gt;fields('att', array('attachment\_info')); $query-&gt;fields('pm', array('meta\_value')); //$query-&gt;addField('pm', 'meta\_value', 'photo'); $query-&gt;addExpression('GROUP\_CONCAT(DISTINCT at.attachment\_info)', 'genres'); //Pull in genres. $query-&gt;condition('at.attachment\_target', 'artist'); $query-&gt;condition('at.attachment\_type', 'genre'); $query-&gt;condition('att.attachment\_type', 'thumbnail'); $query-&gt;condition('pm.meta\_key', '\_wp\_attached\_file'); $query-&gt;groupBy('a.artist\_id'); // Create a MigrateSource object, which manages retrieving the input data. $this-&gt;source = new MigrateSourceSQL($query, array(), NULL, array('map\_joinable' =&gt; FALSE)); // Set up our destination $this-&gt;destination = new MigrateDestinationNode('artist', array('text\_format' =&gt; 'full\_html')); // Assign mappings TO destination fields FROM source fields. $this-&gt;addFieldMapping('title', 'artist\_name'); $this-&gt;addFieldMapping('uid') -&gt;defaultValue(1); $this-&gt;addFieldMapping('changed', 'artist\_publish\_date'); $this-&gt;addFieldMapping('status') -&gt;defaultValue(1); $this-&gt;addFieldMapping('promote', '') -&gt;defaultValue(0); $this-&gt;addFieldMapping('sticky', '') -&gt;defaultValue(0); $this-&gt;addFieldMapping('revision') -&gt;defaultValue(0); $this-&gt;addFieldMapping('log') -&gt;defaultValue('Migrated to Drupal 7 from WordPress.'); $this-&gt;addFieldMapping('comment') -&gt;defaultValue(1); $this-&gt;addFieldMapping('body', 'artist\_bio') -&gt;arguments(array('format' =&gt; 'full\_html')) -&gt;description('See prepareRow()'); $this-&gt;addFieldMapping('created', 'artist\_publish\_date'); $this-&gt;addFieldMapping('field\_labels', 'artist\_record\_company') -&gt;separator(', ') -&gt;arguments(array('create\_term' =&gt; true)); //$this-&gt;addFieldMapping('path', ''); //$this-&gt;addFieldMapping('pathauto', ''); $this-&gt;addFieldMapping('field\_photo', 'meta\_value'); $this-&gt;addFieldMapping('field\_photo:source\_dir') -&gt;defaultValue('/Users/aendrew/Sites/mn\_wp'); $this-&gt;addFieldMapping('field\_photo:preserve\_files') -&gt;defaultValue(true); $this-&gt;addFieldMapping('field\_photo:destination\_file', 'meta\_value'); $this-&gt;addFieldMapping('field\_photo:file\_replace') -&gt;defaultValue(MigrateFile::FILE\_EXISTS\_REUSE); $this-&gt;addFieldMapping('field\_photo:alt', 'artist\_name'); $this-&gt;addFieldMapping('field\_photo:title', 'artist\_name'); $this-&gt;addFieldMapping('field\_links', 'artist\_social\_links') -&gt;description('See prepare()'); //Needs to be unserialized $this-&gt;addFieldMapping('field\_genres', 'genres') -&gt;separator(',') -&gt;arguments(array('create\_term' =&gt; true)); } public function prepareRow($row) { //Prepare Thumbnails $thumb = trim($row-&gt;meta\_value); //watchdog('migrate', 'Filename is ' . $thumb); $row-&gt;meta\_value = 'wp-content/uploads/' . $thumb; } public function prepare(stdClass $node, stdClass $row) { //Set up the links $links = unserialize($row-&gt;artist\_social\_links); $empty = 'a:10:{s:13:"artist\_flickr";s:0:"";s:14:"artist\_youtube";s:0:"";s:12:"artist\_vimeo";s:0:"";s:15:"artist\_facebook";s:0:"";s:14:"artist\_twitter";s:0:"";s:13:"artist\_lastfm";s:0:"";s:14:"artist\_myspace";s:0:"";s:15:"artist\_bandcamp";s:0:"";s:13:"artist\_tumblr";s:0:"";s:19:"artist\_reverbnation";s:0:"";}'; if ($node-&gt;field\_links\[LANGUAGE\_NONE\]\[0\]\['url'] == $empty) { unset($node-&gt;field\_links); } else { $i = 0; foreach ($links as $site =&gt; $link) { if (!empty($link)) { $site\_name = ucfirst(str\_replace('artist\_', '', $site)); if ($site\_name == "Youtube") $site\_name = "YouTube"; if ($site\_name == "Lastfm") $site\_name = "Last.fm"; if ($site\_name == "Youtube") $site\_name = "YouTube"; if ($site\_name == "Myspace") $site\_name = "MySpace"; $node-&gt;field\_links[LANGUAGE\_NONE\]\[$i\]\['title'] = $site\_name; $node-&gt;field\_links[LANGUAGE\_NONE\]\[$i\]['url'] = urldecode($link); $i++; } } } } } ~~~ Did this help you out? Have I saved you a tonne of time? Please leave me a comment letting me know!
+$this-&gt;team = array(
+  new MigrateTeamMember('Ændrew Rininsland', 'aendrew@aendrew.com', t('Developer')),
+);
+
+// Individual mappings in a migration can be linked to a ticket or issue
+// in an external tracking system. Define the URL pattern here in the shared
+// class with ':id:' representing the position of the issue number, then add
+// -&gt;issueNumber(1234) to a mapping.
+$this-&gt;issuePattern = 'http://drupal.org/node/:id:';
 </code></pre>
+
+<p>  }
+}</p>
+
+<p>/<em>*
+ * There are four essential components to set up in your constructor:
+ *  $this->source &ndash; An instance of a class derived from MigrateSource, this
+ *    will feed data to the migration.
+ *  $this->destination &ndash; An instance of a class derived from MigrateDestination,
+ *    this will receive data that originated from the source and has been mapped
+ *    by the Migration class, and create Drupal objects.
+ *  $this->map &ndash; An instance of a class derived from MigrateMap, this will keep
+ *    track of which source items have been imported and what destination objects
+ *    they map to.
+ *  Mappings &ndash; Use $this->addFieldMapping to tell the Migration class what source
+ *    fields correspond to what destination fields, and additional information
+ *    associated with the mappings.
+ </em>/
+class ArtistMigration extends WordTourMigration {
+  public function __construct() {</p>
+
+<pre><code>parent::__construct();
+
+//Set up other database
+Database::addConnectionInfo('wp', 'default', array(
+      'driver' =&gt; 'mysql',
+      'database' =&gt; $this-&gt;wp_db,
+      'username' =&gt; $this-&gt;wp_user,
+      'password' =&gt; $this-&gt;wp_pass,
+      'host' =&gt; $this-&gt;wp_host,
+      'prefix' =&gt; $this-&gt;wp_prefix,
+    ));
+
+$this-&gt;description = t('Migrate the artists!');
+
+$this-&gt;map = new MigrateSQLMap($this-&gt;machineName,
+    array(
+      'artist_id' =&gt; array(
+                       'type' =&gt; 'int',
+                       'length' =&gt; 7,
+                       'not null' =&gt; TRUE,
+                       'description' =&gt; 'Artist ID',
+                      )
+    ),
+    MigrateDestinationNode::getKeySchema()
+  );
+
+$query = Database::getConnection('default', 'wp')
+       -&gt;select('wtr_artists', 'a');
+$query-&gt;join('wtr_attachment', 'at', 'a.artist_id = at.attachment_target_id');
+$query-&gt;join('wtr_attachment', 'att', 'a.artist_id = att.attachment_target_id');
+$query-&gt;join('postmeta', 'pm', 'pm.post_id = att.attachment_type_id');
+$query-&gt;fields('a',
+          array(
+              'artist_id',
+              'artist_name',
+              'artist_publish_date',
+              'artist_bio',
+              'artist_record_company',
+              'artist_social_links',
+          )
+        );
+//$query-&gt;fields('att', array('attachment_info'));
+$query-&gt;fields('pm', array('meta_value'));
+//$query-&gt;addField('pm', 'meta_value', 'photo');
+$query-&gt;addExpression('GROUP_CONCAT(DISTINCT at.attachment_info)', 'genres'); //Pull in genres.
+$query-&gt;condition('at.attachment_target', 'artist');
+$query-&gt;condition('at.attachment_type', 'genre');
+$query-&gt;condition('att.attachment_type', 'thumbnail');
+$query-&gt;condition('pm.meta_key', '_wp_attached_file');
+$query-&gt;groupBy('a.artist_id');
+
+
+// Create a MigrateSource object, which manages retrieving the input data.
+$this-&gt;source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' =&gt; FALSE));
+
+// Set up our destination
+$this-&gt;destination = new MigrateDestinationNode('artist', array('text_format' =&gt; 'full_html'));
+
+// Assign mappings TO destination fields FROM source fields.
+$this-&gt;addFieldMapping('title', 'artist_name');
+$this-&gt;addFieldMapping('uid')
+     -&gt;defaultValue(1);
+$this-&gt;addFieldMapping('changed', 'artist_publish_date');
+$this-&gt;addFieldMapping('status')
+     -&gt;defaultValue(1);
+$this-&gt;addFieldMapping('promote', '')
+     -&gt;defaultValue(0);
+$this-&gt;addFieldMapping('sticky', '')
+     -&gt;defaultValue(0);
+$this-&gt;addFieldMapping('revision')
+     -&gt;defaultValue(0);
+$this-&gt;addFieldMapping('log')
+     -&gt;defaultValue('Migrated to Drupal 7 from WordPress.');
+$this-&gt;addFieldMapping('comment')
+     -&gt;defaultValue(1);
+$this-&gt;addFieldMapping('body', 'artist_bio')
+      -&gt;arguments(array('format' =&gt; 'full_html'))
+      -&gt;description('See prepareRow()');
+$this-&gt;addFieldMapping('created', 'artist_publish_date');
+$this-&gt;addFieldMapping('field_labels', 'artist_record_company')
+      -&gt;separator(', ')
+      -&gt;arguments(array('create_term' =&gt; true));
+//$this-&gt;addFieldMapping('path', '');
+//$this-&gt;addFieldMapping('pathauto', '');
+$this-&gt;addFieldMapping('field_photo', 'meta_value');
+$this-&gt;addFieldMapping('field_photo:source_dir')
+     -&gt;defaultValue('/Users/aendrew/Sites/mn_wp');
+$this-&gt;addFieldMapping('field_photo:preserve_files')
+     -&gt;defaultValue(true);
+$this-&gt;addFieldMapping('field_photo:destination_file', 'meta_value');
+$this-&gt;addFieldMapping('field_photo:file_replace')
+     -&gt;defaultValue(MigrateFile::FILE_EXISTS_REUSE);
+$this-&gt;addFieldMapping('field_photo:alt', 'artist_name');
+$this-&gt;addFieldMapping('field_photo:title', 'artist_name');
+$this-&gt;addFieldMapping('field_links', 'artist_social_links')
+     -&gt;description('See prepare()'); //Needs to be unserialized
+$this-&gt;addFieldMapping('field_genres', 'genres')
+      -&gt;separator(',')
+      -&gt;arguments(array('create_term' =&gt; true));
+</code></pre>
+
+<p>  }</p>
+
+<p>  public function prepareRow($row) {</p>
+
+<pre><code>//Prepare Thumbnails
+$thumb = trim($row-&gt;meta_value);
+//watchdog('migrate', 'Filename is ' . $thumb);
+$row-&gt;meta_value = 'wp-content/uploads/' . $thumb;
+</code></pre>
+
+<p>  }</p>
+
+<p>  public function prepare(stdClass $node, stdClass $row) {</p>
+
+<pre><code>//Set up the links
+$links = unserialize($row-&gt;artist_social_links);
+$empty = 'a:10:{s:13:"artist_flickr";s:0:"";s:14:"artist_youtube";s:0:"";s:12:"artist_vimeo";s:0:"";s:15:"artist_facebook";s:0:"";s:14:"artist_twitter";s:0:"";s:13:"artist_lastfm";s:0:"";s:14:"artist_myspace";s:0:"";s:15:"artist_bandcamp";s:0:"";s:13:"artist_tumblr";s:0:"";s:19:"artist_reverbnation";s:0:"";}';
+if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
+  unset($node-&gt;field_links);
+} else {
+  $i = 0;
+  foreach ($links as $site =&gt; $link) {
+    if (!empty($link)) {
+      $site_name = ucfirst(str_replace('artist_', '', $site));
+      if ($site_name == "Youtube") $site_name = "YouTube";
+      if ($site_name == "Lastfm") $site_name = "Last.fm";
+      if ($site_name == "Youtube") $site_name = "YouTube";
+      if ($site_name == "Myspace") $site_name = "MySpace";
+      $node-&gt;field_links[LANGUAGE_NONE][$i]['title'] = $site_name;
+      $node-&gt;field_links[LANGUAGE_NONE][$i]['url'] = urldecode($link);
+      $i++;
+    }
+  }
+}
+</code></pre>
+
+<p>  }
+}
+~~~</p>
+
+<p>Did this help you out? Have I saved you a tonne of time? Please leave me a comment letting me know!</p>
 </div>
 
 
@@ -170,7 +344,7 @@ $this-&gt;team = array( new MigrateTeamMember('Ændrew Rininsland', 'aendrew@aen
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2013/04/09/migrate-wordtour-openmusicfestival/" data-via="" data-counturl="http://yoursite.com/blog/2013/04/09/migrate-wordtour-openmusicfestival/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://aendrew.github.io/blog/2013/04/09/migrate-wordtour-openmusicfestival/" data-via="" data-counturl="http://aendrew.github.io/blog/2013/04/09/migrate-wordtour-openmusicfestival/" >Tweet</a>
   
   
   

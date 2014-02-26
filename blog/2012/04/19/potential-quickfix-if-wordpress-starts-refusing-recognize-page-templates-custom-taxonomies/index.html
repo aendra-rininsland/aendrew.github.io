@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies">
+  <link rel="canonical" href="http://aendrew.github.io/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies">
   <link href="/favicon.png" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
 
@@ -64,7 +64,7 @@
             </ul>
             
                 <form class="search navbar-form navbar-right" action="http://google.com/search" method="GET">
-                    <input type="hidden" name="q" value="site:yoursite.com">
+                    <input type="hidden" name="q" value="site:aendrew.github.io">
                     <div class="form-group">
                         <input class="form-control" type="text" name="q" placeholder="Search">
                     </div>
@@ -111,7 +111,26 @@
   </header>
 
 
-<div class="entry-content clearfix"><p>Is WordPress being sofa kingdom by returning Error 404 for custom taxonomies, or doesn&rsquo;t recognize taxonomy-{name}.php template files in your theme? Does it inexplicably *start* working if you set permalinks to &ldquo;default&rdquo;? Can you likewise find very little documentation as to why this might be the case? In the hopes this will save somebody a bunch of time — and potential lost sleep, as is my case this morning — I&rsquo;m posting the awful hack-y solution that made stuff start working. I&rsquo;m *sure* this is the wrong way of doing this, and if you have any plugins that rewrite page URLs, it may make them stop working. No warranty at all if this doesn&rsquo;t work, and I will *not* provide support for anything related to custom posts/taxonomies (*Protip:* For projects outside of WordPress&#8217; post/pages/links/media content types, don&rsquo;t use WordPress — *<strong>|USE DRUPAL*</strong>|.). Anyhoo, add the following to your theme&rsquo;s **functions.php**: <del> add_filter(&lsquo;init&rsquo;,&lsquo;flushRules&rsquo;); // Remember to flush_rules() when adding rules function flushRules(){ global $wp_rewrite; $wp_rewrite->flush_rules(); } </del> <strong>Did this help you? Let me know by leaving a comment!</strong></p>
+<div class="entry-content clearfix"><p>Is WordPress being sofa kingdom by returning Error 404 for custom taxonomies, or doesn&rsquo;t recognize taxonomy-{name}.php template files in your theme? Does it inexplicably <em>start</em> working if you set permalinks to &ldquo;default&rdquo;? Can you likewise find very little documentation as to why this might be the case?</p>
+
+<p>In the hopes this will save somebody a bunch of time — and potential lost sleep, as is my case this morning — I&rsquo;m posting the awful hack-y solution that made stuff start working. I&rsquo;m <em>sure</em> this is the wrong way of doing this, and if you have any plugins that rewrite page URLs, it may make them stop working. No warranty at all if this doesn&rsquo;t work, and I will <em>not</em> provide support for anything related to custom posts/taxonomies (<em>Protip:</em> For projects outside of WordPress&#8217; post/pages/links/media content types, don&rsquo;t use WordPress — <strong><em>USE DRUPAL</em></strong>.).</p>
+
+<p>Anyhoo, add the following to your theme&rsquo;s <strong>functions.php</strong>:</p>
+
+<p>~~~
+add_filter(&lsquo;init&rsquo;,&lsquo;flushRules&rsquo;);</p>
+
+<p>// Remember to flush_rules() when adding rules
+function flushRules(){</p>
+
+<pre><code>global $wp_rewrite;
+$wp_rewrite-&gt;flush_rules();
+</code></pre>
+
+<p>}
+~~~</p>
+
+<p><strong>Did this help you? Let me know by leaving a comment!</strong></p>
 </div>
 
 
@@ -143,7 +162,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies/" data-via="" data-counturl="http://yoursite.com/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://aendrew.github.io/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies/" data-via="" data-counturl="http://aendrew.github.io/blog/2012/04/19/potential-quickfix-if-wordpress-starts-refusing-recognize-page-templates-custom-taxonomies/" >Tweet</a>
   
   
   

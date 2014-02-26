@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney">
+  <link rel="canonical" href="http://aendrew.github.io/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney">
   <link href="/favicon.png" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
 
@@ -64,7 +64,7 @@
             </ul>
             
                 <form class="search navbar-form navbar-right" action="http://google.com/search" method="GET">
-                    <input type="hidden" name="q" value="site:yoursite.com">
+                    <input type="hidden" name="q" value="site:aendrew.github.io">
                     <div class="form-group">
                         <input class="form-control" type="text" name="q" placeholder="Search">
                     </div>
@@ -111,7 +111,58 @@
   </header>
 
 
-<div class="entry-content clearfix"><p>**UPDATED:** Now allows you to filter based on a comma-separated list of wards! More accurate application geolocation data based on eastings/northings! Wicked, yo! See below! Ever wanted a way to learn about planning applications and appeals in the London borough of Hackney? The borough council&rsquo;s website has an ASP-driven search tool for both applications and appeals, but no way to get the latest ones in something as convenient as an RSS feed. To this end I&rsquo;ve built two scrapers via [ScraperWiki](<a href="http://www.scraperwiki.com">http://www.scraperwiki.com</a>) ([Applications](<a href="https://scraperwiki.com/scrapers/hackney_planning_simpletest_browser_attempt_1/">https://scraperwiki.com/scrapers/hackney_planning_simpletest_browser_attempt_1/</a>) and [Appeals](<a href="https://scraperwiki.com/scrapers/hackney_planning_appeal_simpletest_browser/">https://scraperwiki.com/scrapers/hackney_planning_appeal_simpletest_browser/</a>)), which are feeding a [view](<a href="https://scraperwiki.com/views/hackney_council_planning_and_appeals_rss_output/">https://scraperwiki.com/views/hackney_council_planning_and_appeals_rss_output/</a>) outputting [GeoRSS](<a href="http://www.georss.org">http://www.georss.org</a>). To add it to Google Reader or another RSS-based tool: * For a combined listing of both applications and appeals, regardless of geolocation success, use: * <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?</a> * For just applications, use: * <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications</a> * For just appeals, use: * <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals</a> * **|New!** To return only records in specific wards, use ward=[comma-separated list of wards] * Example: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?wards=De%20Beauvoir,Olympic%20Development%20Authority">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?wards=De%20Beauvoir,Olympic%20Development%20Authority</a> * This returns all records that are either in De Beauvoir or through the Olympic Development Authority (Replace spaces with %20!) * To output only records with latitude/longitude data, add &amp;strict=true to the end. See note below. * Combined: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?strict=true</a> * Just applications: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications&amp;strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications&amp;strict=true</a> * Just appeals: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals&amp;strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals&amp;strict=true</a> <strike>Note: I geolocate using ScraperWiki&rsquo;s built-in functions, which are dependent upon postal code. I may try to update the scrapers in the future to grab Eastings and Northings as applications related to sites without a postal code (for instance, those involving forthcoming Olympic sites) won&rsquo;t geocode and thus be omitted using the &ldquo;strict=true&rdquo; flag.</strike> I&rsquo;ve updated the script to grab eastings/northings for applications so they&rsquo;re way more accurate. Note that eastings/northings data is not available for appeals, which still use postal code geolocation and may thus be less accurate (Or lacking geolocation data in the unlikely event it&rsquo;s an appeal without a postal code.). To see how this could be used in a more interesting way than just Google Reader, check out this [RSSMapper Google Maps/geoRSS mashup](<a href="http://www.rssmapper.com/map/map?id=201112111844033">http://www.rssmapper.com/map/map?id=201112111844033</a>) I made. <strong>Special thanks to [Ross Jones](<a href="https://twitter.com/rossjones">https://twitter.com/rossjones</a>) who spent over an hour helping me figure out why my regex wouldn&rsquo;t work with the Hackney Council planning application search output.</strong></p>
+<div class="entry-content clearfix"><p><strong>UPDATED:</strong> Now allows you to filter based on a comma-separated list of wards! More accurate application geolocation data based on eastings/northings! Wicked, yo! See below!</p>
+
+<p>Ever wanted a way to learn about planning applications and appeals in the London borough of Hackney? The borough council&rsquo;s website has an ASP-driven search tool for both applications and appeals, but no way to get the latest ones in something as convenient as an RSS feed.</p>
+
+<p>To this end I&rsquo;ve built two scrapers via <a href="http://www.scraperwiki.com">ScraperWiki</a> (<a href="https://scraperwiki.com/scrapers/hackney_planning_simpletest_browser_attempt_1/">Applications</a> and <a href="https://scraperwiki.com/scrapers/hackney_planning_appeal_simpletest_browser/">Appeals</a>), which are feeding a <a href="https://scraperwiki.com/views/hackney_council_planning_and_appeals_rss_output/">view</a> outputting <a href="http://www.georss.org">GeoRSS</a>. To add it to Google Reader or another RSS-based tool:</p>
+
+<ul>
+<li>For a combined listing of both applications and appeals, regardless of geolocation success, use:
+
+<ul>
+<li><a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?</a></li>
+</ul>
+</li>
+<li>For just applications, use:
+
+<ul>
+<li><a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications</a></li>
+</ul>
+</li>
+<li>For just appeals, use:
+
+<ul>
+<li><a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals</a></li>
+</ul>
+</li>
+<li><strong>New!</strong> To return only records in specific wards, use ward=[comma-separated list of wards]
+
+<ul>
+<li>Example: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?wards=De%20Beauvoir,Olympic%20Development%20Authority">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?wards=De%20Beauvoir,Olympic%20Development%20Authority</a>
+
+<ul>
+<li>This returns all records that are either in De Beauvoir or through the Olympic Development Authority (Replace spaces with %20!)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To output only records with latitude/longitude data, add &amp;strict=true to the end. See note below.
+
+<ul>
+<li>Combined: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?strict=true</a></li>
+<li>Just applications: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications&amp;strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=applications&amp;strict=true</a></li>
+<li>Just appeals: <a href="https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals&amp;strict=true">https://views.scraperwiki.com/run/hackney_council_planning_and_appeals_rss_output/?feed=appeals&amp;strict=true</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p><strike>Note: I geolocate using ScraperWiki&rsquo;s built-in functions, which are dependent upon postal code. I may try to update the scrapers in the future to grab Eastings and Northings as applications related to sites without a postal code (for instance, those involving forthcoming Olympic sites) won&rsquo;t geocode and thus be omitted using the &ldquo;strict=true&rdquo; flag.</strike> I&rsquo;ve updated the script to grab eastings/northings for applications so they&rsquo;re way more accurate. Note that eastings/northings data is not available for appeals, which still use postal code geolocation and may thus be less accurate (Or lacking geolocation data in the unlikely event it&rsquo;s an appeal without a postal code.).</p>
+
+<p>To see how this could be used in a more interesting way than just Google Reader, check out this <a href="http://www.rssmapper.com/map/map?id=201112111844033">RSSMapper Google Maps/geoRSS mashup</a> I made.</p>
+
+<p><strong>Special thanks to <a href="https://twitter.com/rossjones">Ross Jones</a> who spent over an hour helping me figure out why my regex wouldn&rsquo;t work with the Hackney Council planning application search output.</strong></p>
 </div>
 
 
@@ -143,7 +194,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney/" data-via="" data-counturl="http://yoursite.com/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://aendrew.github.io/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney/" data-via="" data-counturl="http://aendrew.github.io/blog/2012/01/03/rss-feed-planning-applications-and-appeals-hackney/" >Tweet</a>
   
   
   
