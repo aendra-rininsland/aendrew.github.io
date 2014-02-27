@@ -4,7 +4,7 @@
   <title><![CDATA[aendrew.com]]></title>
   <link href="http://aendrew.github.io/atom.xml" rel="self"/>
   <link href="http://aendrew.github.io/"/>
-  <updated>2014-02-27T00:59:48+00:00</updated>
+  <updated>2014-02-27T01:35:21+00:00</updated>
   <id>http://aendrew.github.io/</id>
   <author>
     <name><![CDATA[Ændrew Rininsland]]></name>
@@ -443,7 +443,7 @@
     <id>http://aendrew.github.io/content/help-me-launch-visualization-groupsdrupalorg</id>
     <content type="html"><![CDATA[<p>I&rsquo;m trying to start a group on G.D.O dedicated to <a href="http://groups.drupal.org/visualization">visualization with Drupal</a>. We need more members and activity before being promoted to a full group — if interested, please join!</p>
 
-<h2><a href="http://groups.drupal.org/visualization">groups.drupal.org/visualization</a></h2>
+<h4><a href="http://groups.drupal.org/visualization">groups.drupal.org/visualization</a></h4>
 ]]></content>
   </entry>
   
@@ -522,7 +522,7 @@
     <link href="http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals/"/>
     <updated>2012-07-08T15:37:37+01:00</updated>
     <id>http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals</id>
-    <content type="html"><![CDATA[<p>For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via <a href="http://festivals.aendrew.com/sparql">RDF/Sparql</a>. <a href="http://festivals.aendrew.com">Visit the result here.</a> What follows is the article that accompanied it.</p>
+    <content type="html"><![CDATA[<p>For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via <a href="http://festivals.aendrew.com/sparql">RDF/Sparql</a>. <a href="http://festivals.aendrew.com">Visit the result here.</a> What follows is the article that accompanied it. <!-- more --></p>
 
 <hr />
 
