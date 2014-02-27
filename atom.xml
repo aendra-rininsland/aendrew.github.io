@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[aendrew.com]]></title>
   <link href="http://aendrew.github.io/atom.xml" rel="self"/>
   <link href="http://aendrew.github.io/"/>
-  <updated>2014-02-26T23:30:41+00:00</updated>
+  <updated>2014-02-27T00:59:48+00:00</updated>
   <id>http://aendrew.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Ændrew Rininsland]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,209 +15,379 @@
   
   <entry>
     <title type="html"><![CDATA[Migrate from WordTour to OpenMusicFestival]]></title>
-    <link href="http://aendrew.github.io/blog/2013/04/09/migrate-wordtour-openmusicfestival/"/>
+    <link href="http://aendrew.github.io/content/migrate-wordtour-openmusicfestival/"/>
     <updated>2013-04-09T12:45:53+01:00</updated>
-    <id>http://aendrew.github.io/blog/2013/04/09/migrate-wordtour-openmusicfestival</id>
+    <id>http://aendrew.github.io/content/migrate-wordtour-openmusicfestival</id>
     <content type="html"><![CDATA[<p>The reason I created <a href="http://www.openmusicfestival.com">OpenMusicFestival</a> in the first place was so that I could migrate <a href="http://www.motionnotion.com">MotionNotion.com</a> from WordPress (And its unsupported WordTour plugin) to Drupal 7.</p>
 
 <p>While I suspect my original use of WordTour for a music festival was slightly weird (The system was designed for small record labels, but relationship between artists, events and venues made it work for my purposes), I&rsquo;m releasing my Artist migration class in case somebody finds it useful and wants to migrate to OpenMusicFestival. Note that this only migrates Artists — the Event and Venues parts are incomplete (On that note, if somebody wants to do those, I&rsquo;ll happily both give you credit on the project as well as include the code with OMF.).</p>
 
-<p>~~~
-&lt;?php
-/<em><em>
- * @file
- *  Migrate content from WordTour (WP) to OMF (Drupal)
- *
- *  NOTE: THIS IS WOEFULLY INCOMPLETE. I would </em>love</em> to give somebody credit
- *  for tidying up and completing this.
- */</p>
+<figure class='code'><figcaption><span>migrate_wordtour.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * @file</span>
+</span><span class='line'><span class="sd"> *  Migrate content from WordTour (WP) to OMF (Drupal)</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> *  NOTE: THIS IS WOEFULLY INCOMPLETE. I would *love* to give somebody credit</span>
+</span><span class='line'><span class="sd"> *  for tidying up and completing this.</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">WordTourMigration</span> <span class="k">extends</span> <span class="nx">Migration</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="nv">$wp_prefix</span> <span class="o">=</span> <span class="s1">&#39;wp_&#39;</span><span class="p">;</span> <span class="c1">//This is the entire first part of the table name.</span>
+</span><span class='line'>  <span class="k">public</span> <span class="nv">$wp_db</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">public</span> <span class="nv">$wp_user</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">public</span> <span class="nv">$wp_pass</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">public</span> <span class="nv">$wp_host</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Always call the parent constructor first for basic setup</span>
+</span><span class='line'>    <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// With migrate_ui enabled, migration pages will indicate people involved in</span>
+</span><span class='line'>    <span class="c1">// the particular migration, with their role and contact info. We default the</span>
+</span><span class='line'>    <span class="c1">// list in the shared class; it can be overridden for specific migrations.</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">team</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="k">new</span> <span class="nx">MigrateTeamMember</span><span class="p">(</span><span class="s1">&#39;Ændrew Rininsland&#39;</span><span class="p">,</span> <span class="s1">&#39;aendrew@aendrew.com&#39;</span><span class="p">,</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Developer&#39;</span><span class="p">)),</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Individual mappings in a migration can be linked to a ticket or issue</span>
+</span><span class='line'>    <span class="c1">// in an external tracking system. Define the URL pattern here in the shared</span>
+</span><span class='line'>    <span class="c1">// class with &#39;:id:&#39; representing the position of the issue number, then add</span>
+</span><span class='line'>    <span class="c1">// -&gt;issueNumber(1234) to a mapping.</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">issuePattern</span> <span class="o">=</span> <span class="s1">&#39;http://drupal.org/node/:id:&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * There are four essential components to set up in your constructor:</span>
+</span><span class='line'><span class="sd"> *  $this-&gt;source - An instance of a class derived from MigrateSource, this</span>
+</span><span class='line'><span class="sd"> *    will feed data to the migration.</span>
+</span><span class='line'><span class="sd"> *  $this-&gt;destination - An instance of a class derived from MigrateDestination,</span>
+</span><span class='line'><span class="sd"> *    this will receive data that originated from the source and has been mapped</span>
+</span><span class='line'><span class="sd"> *    by the Migration class, and create Drupal objects.</span>
+</span><span class='line'><span class="sd"> *  $this-&gt;map - An instance of a class derived from MigrateMap, this will keep</span>
+</span><span class='line'><span class="sd"> *    track of which source items have been imported and what destination objects</span>
+</span><span class='line'><span class="sd"> *    they map to.</span>
+</span><span class='line'><span class="sd"> *  Mappings - Use $this-&gt;addFieldMapping to tell the Migration class what source</span>
+</span><span class='line'><span class="sd"> *    fields correspond to what destination fields, and additional information</span>
+</span><span class='line'><span class="sd"> *    associated with the mappings.</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">ArtistMigration</span> <span class="k">extends</span> <span class="nx">WordTourMigration</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//Set up other database</span>
+</span><span class='line'>    <span class="nx">Database</span><span class="o">::</span><span class="na">addConnectionInfo</span><span class="p">(</span><span class="s1">&#39;wp&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;database&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wp_db</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wp_user</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wp_pass</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wp_host</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wp_prefix</span><span class="p">,</span>
+</span><span class='line'>        <span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">description</span> <span class="o">=</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Migrate the artists!&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MigrateSQLMap</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">machineName</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;artist_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                           <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+</span><span class='line'>                           <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">7</span><span class="p">,</span>
+</span><span class='line'>                           <span class="s1">&#39;not null&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">,</span>
+</span><span class='line'>                           <span class="s1">&#39;description&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Artist ID&#39;</span><span class="p">,</span>
+</span><span class='line'>                          <span class="p">)</span>
+</span><span class='line'>        <span class="p">),</span>
+</span><span class='line'>        <span class="nx">MigrateDestinationNode</span><span class="o">::</span><span class="na">getKeySchema</span><span class="p">()</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$query</span> <span class="o">=</span> <span class="nx">Database</span><span class="o">::</span><span class="na">getConnection</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;wp&#39;</span><span class="p">)</span>
+</span><span class='line'>           <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;wtr_artists&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;wtr_attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;at&#39;</span><span class="p">,</span> <span class="s1">&#39;a.artist_id = at.attachment_target_id&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;wtr_attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;att&#39;</span><span class="p">,</span> <span class="s1">&#39;a.artist_id = att.attachment_target_id&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;postmeta&#39;</span><span class="p">,</span> <span class="s1">&#39;pm&#39;</span><span class="p">,</span> <span class="s1">&#39;pm.post_id = att.attachment_type_id&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">fields</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+</span><span class='line'>              <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_id&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_publish_date&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_bio&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_record_company&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="s1">&#39;artist_social_links&#39;</span><span class="p">,</span>
+</span><span class='line'>              <span class="p">)</span>
+</span><span class='line'>            <span class="p">);</span>
+</span><span class='line'>    <span class="c1">//$query-&gt;fields(&#39;att&#39;, array(&#39;attachment_info&#39;));</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">fields</span><span class="p">(</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;meta_value&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="c1">//$query-&gt;addField(&#39;pm&#39;, &#39;meta_value&#39;, &#39;photo&#39;);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">addExpression</span><span class="p">(</span><span class="s1">&#39;GROUP_CONCAT(DISTINCT at.attachment_info)&#39;</span><span class="p">,</span> <span class="s1">&#39;genres&#39;</span><span class="p">);</span> <span class="c1">//Pull in genres.</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">condition</span><span class="p">(</span><span class="s1">&#39;at.attachment_target&#39;</span><span class="p">,</span> <span class="s1">&#39;artist&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">condition</span><span class="p">(</span><span class="s1">&#39;at.attachment_type&#39;</span><span class="p">,</span> <span class="s1">&#39;genre&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">condition</span><span class="p">(</span><span class="s1">&#39;att.attachment_type&#39;</span><span class="p">,</span> <span class="s1">&#39;thumbnail&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">condition</span><span class="p">(</span><span class="s1">&#39;pm.meta_key&#39;</span><span class="p">,</span> <span class="s1">&#39;_wp_attached_file&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;a.artist_id&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create a MigrateSource object, which manages retrieving the input data.</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MigrateSourceSQL</span><span class="p">(</span><span class="nv">$query</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;map_joinable&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Set up our destination</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">destination</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MigrateDestinationNode</span><span class="p">(</span><span class="s1">&#39;artist&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;text_format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;full_html&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Assign mappings TO destination fields FROM source fields.</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_name&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;changed&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_publish_date&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;promote&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;sticky&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;revision&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="s1">&#39;Migrated to Drupal 7 from WordPress.&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_bio&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">arguments</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;full_html&#39;</span><span class="p">))</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">description</span><span class="p">(</span><span class="s1">&#39;See prepareRow()&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_publish_date&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_labels&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_record_company&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">separator</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">arguments</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;create_term&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</span><span class='line'>    <span class="c1">//$this-&gt;addFieldMapping(&#39;path&#39;, &#39;&#39;);</span>
+</span><span class='line'>    <span class="c1">//$this-&gt;addFieldMapping(&#39;pathauto&#39;, &#39;&#39;);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo&#39;</span><span class="p">,</span> <span class="s1">&#39;meta_value&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:source_dir&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="s1">&#39;/Users/aendrew/Sites/mn_wp&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:preserve_files&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:destination_file&#39;</span><span class="p">,</span> <span class="s1">&#39;meta_value&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:file_replace&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="nx">MigrateFile</span><span class="o">::</span><span class="na">FILE_EXISTS_REUSE</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:alt&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_name&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_photo:title&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_name&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_links&#39;</span><span class="p">,</span> <span class="s1">&#39;artist_social_links&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="o">-&gt;</span><span class="na">description</span><span class="p">(</span><span class="s1">&#39;See prepare()&#39;</span><span class="p">);</span> <span class="c1">//Needs to be unserialized</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addFieldMapping</span><span class="p">(</span><span class="s1">&#39;field_genres&#39;</span><span class="p">,</span> <span class="s1">&#39;genres&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">separator</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">arguments</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;create_term&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">prepareRow</span><span class="p">(</span><span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Prepare Thumbnails</span>
+</span><span class='line'>    <span class="nv">$thumb</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">meta_value</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">//watchdog(&#39;migrate&#39;, &#39;Filename is &#39; . $thumb);</span>
+</span><span class='line'>    <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">meta_value</span> <span class="o">=</span> <span class="s1">&#39;wp-content/uploads/&#39;</span> <span class="o">.</span> <span class="nv">$thumb</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">prepare</span><span class="p">(</span><span class="k">stdClass</span> <span class="nv">$node</span><span class="p">,</span> <span class="k">stdClass</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Set up the links</span>
+</span><span class='line'>    <span class="nv">$links</span> <span class="o">=</span> <span class="nb">unserialize</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">artist_social_links</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$empty</span> <span class="o">=</span> <span class="s1">&#39;a:10:{s:13:&quot;artist_flickr&quot;;s:0:&quot;&quot;;s:14:&quot;artist_youtube&quot;;s:0:&quot;&quot;;s:12:&quot;artist_vimeo&quot;;s:0:&quot;&quot;;s:15:&quot;artist_facebook&quot;;s:0:&quot;&quot;;s:14:&quot;artist_twitter&quot;;s:0:&quot;&quot;;s:13:&quot;artist_lastfm&quot;;s:0:&quot;&quot;;s:14:&quot;artist_myspace&quot;;s:0:&quot;&quot;;s:15:&quot;artist_bandcamp&quot;;s:0:&quot;&quot;;s:13:&quot;artist_tumblr&quot;;s:0:&quot;&quot;;s:19:&quot;artist_reverbnation&quot;;s:0:&quot;&quot;;}&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="na">field_links</span><span class="p">[</span><span class="nx">LANGUAGE_NONE</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nv">$empty</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">unset</span><span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="na">field_links</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">foreach</span> <span class="p">(</span><span class="nv">$links</span> <span class="k">as</span> <span class="nv">$site</span> <span class="o">=&gt;</span> <span class="nv">$link</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$link</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$site_name</span> <span class="o">=</span> <span class="nx">ucfirst</span><span class="p">(</span><span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;artist_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$site</span><span class="p">));</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nv">$site_name</span> <span class="o">==</span> <span class="s2">&quot;Youtube&quot;</span><span class="p">)</span> <span class="nv">$site_name</span> <span class="o">=</span> <span class="s2">&quot;YouTube&quot;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nv">$site_name</span> <span class="o">==</span> <span class="s2">&quot;Lastfm&quot;</span><span class="p">)</span> <span class="nv">$site_name</span> <span class="o">=</span> <span class="s2">&quot;Last.fm&quot;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nv">$site_name</span> <span class="o">==</span> <span class="s2">&quot;Youtube&quot;</span><span class="p">)</span> <span class="nv">$site_name</span> <span class="o">=</span> <span class="s2">&quot;YouTube&quot;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nv">$site_name</span> <span class="o">==</span> <span class="s2">&quot;Myspace&quot;</span><span class="p">)</span> <span class="nv">$site_name</span> <span class="o">=</span> <span class="s2">&quot;MySpace&quot;</span><span class="p">;</span>
+</span><span class='line'>          <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">field_links</span><span class="p">[</span><span class="nx">LANGUAGE_NONE</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$site_name</span><span class="p">;</span>
+</span><span class='line'>          <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">field_links</span><span class="p">[</span><span class="nx">LANGUAGE_NONE</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">urldecode</span><span class="p">(</span><span class="nv">$link</span><span class="p">);</span>
+</span><span class='line'>          <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>class WordTourMigration extends Migration {
-  public $wp_prefix = &lsquo;wp_&rsquo;; //This is the entire first part of the table name.
-  public $wp_db = &lsquo;&rsquo;;
-  public $wp_user = &lsquo;&rsquo;;
-  public $wp_pass = &lsquo;&rsquo;;
-  public $wp_host = &lsquo;localhost&rsquo;;</p>
-
-<p>  public function __construct() {</p>
-
-<pre><code>// Always call the parent constructor first for basic setup
-parent::__construct();
-
-// With migrate_ui enabled, migration pages will indicate people involved in
-// the particular migration, with their role and contact info. We default the
-// list in the shared class; it can be overridden for specific migrations.
-$this-&gt;team = array(
-  new MigrateTeamMember('Ændrew Rininsland', 'aendrew@aendrew.com', t('Developer')),
-);
-
-// Individual mappings in a migration can be linked to a ticket or issue
-// in an external tracking system. Define the URL pattern here in the shared
-// class with ':id:' representing the position of the issue number, then add
-// -&gt;issueNumber(1234) to a mapping.
-$this-&gt;issuePattern = 'http://drupal.org/node/:id:';
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>/<em>*
- * There are four essential components to set up in your constructor:
- *  $this->source &ndash; An instance of a class derived from MigrateSource, this
- *    will feed data to the migration.
- *  $this->destination &ndash; An instance of a class derived from MigrateDestination,
- *    this will receive data that originated from the source and has been mapped
- *    by the Migration class, and create Drupal objects.
- *  $this->map &ndash; An instance of a class derived from MigrateMap, this will keep
- *    track of which source items have been imported and what destination objects
- *    they map to.
- *  Mappings &ndash; Use $this->addFieldMapping to tell the Migration class what source
- *    fields correspond to what destination fields, and additional information
- *    associated with the mappings.
- </em>/
-class ArtistMigration extends WordTourMigration {
-  public function __construct() {</p>
-
-<pre><code>parent::__construct();
-
-//Set up other database
-Database::addConnectionInfo('wp', 'default', array(
-      'driver' =&gt; 'mysql',
-      'database' =&gt; $this-&gt;wp_db,
-      'username' =&gt; $this-&gt;wp_user,
-      'password' =&gt; $this-&gt;wp_pass,
-      'host' =&gt; $this-&gt;wp_host,
-      'prefix' =&gt; $this-&gt;wp_prefix,
-    ));
-
-$this-&gt;description = t('Migrate the artists!');
-
-$this-&gt;map = new MigrateSQLMap($this-&gt;machineName,
-    array(
-      'artist_id' =&gt; array(
-                       'type' =&gt; 'int',
-                       'length' =&gt; 7,
-                       'not null' =&gt; TRUE,
-                       'description' =&gt; 'Artist ID',
-                      )
-    ),
-    MigrateDestinationNode::getKeySchema()
-  );
-
-$query = Database::getConnection('default', 'wp')
-       -&gt;select('wtr_artists', 'a');
-$query-&gt;join('wtr_attachment', 'at', 'a.artist_id = at.attachment_target_id');
-$query-&gt;join('wtr_attachment', 'att', 'a.artist_id = att.attachment_target_id');
-$query-&gt;join('postmeta', 'pm', 'pm.post_id = att.attachment_type_id');
-$query-&gt;fields('a',
-          array(
-              'artist_id',
-              'artist_name',
-              'artist_publish_date',
-              'artist_bio',
-              'artist_record_company',
-              'artist_social_links',
-          )
-        );
-//$query-&gt;fields('att', array('attachment_info'));
-$query-&gt;fields('pm', array('meta_value'));
-//$query-&gt;addField('pm', 'meta_value', 'photo');
-$query-&gt;addExpression('GROUP_CONCAT(DISTINCT at.attachment_info)', 'genres'); //Pull in genres.
-$query-&gt;condition('at.attachment_target', 'artist');
-$query-&gt;condition('at.attachment_type', 'genre');
-$query-&gt;condition('att.attachment_type', 'thumbnail');
-$query-&gt;condition('pm.meta_key', '_wp_attached_file');
-$query-&gt;groupBy('a.artist_id');
-
-
-// Create a MigrateSource object, which manages retrieving the input data.
-$this-&gt;source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' =&gt; FALSE));
-
-// Set up our destination
-$this-&gt;destination = new MigrateDestinationNode('artist', array('text_format' =&gt; 'full_html'));
-
-// Assign mappings TO destination fields FROM source fields.
-$this-&gt;addFieldMapping('title', 'artist_name');
-$this-&gt;addFieldMapping('uid')
-     -&gt;defaultValue(1);
-$this-&gt;addFieldMapping('changed', 'artist_publish_date');
-$this-&gt;addFieldMapping('status')
-     -&gt;defaultValue(1);
-$this-&gt;addFieldMapping('promote', '')
-     -&gt;defaultValue(0);
-$this-&gt;addFieldMapping('sticky', '')
-     -&gt;defaultValue(0);
-$this-&gt;addFieldMapping('revision')
-     -&gt;defaultValue(0);
-$this-&gt;addFieldMapping('log')
-     -&gt;defaultValue('Migrated to Drupal 7 from WordPress.');
-$this-&gt;addFieldMapping('comment')
-     -&gt;defaultValue(1);
-$this-&gt;addFieldMapping('body', 'artist_bio')
-      -&gt;arguments(array('format' =&gt; 'full_html'))
-      -&gt;description('See prepareRow()');
-$this-&gt;addFieldMapping('created', 'artist_publish_date');
-$this-&gt;addFieldMapping('field_labels', 'artist_record_company')
-      -&gt;separator(', ')
-      -&gt;arguments(array('create_term' =&gt; true));
-//$this-&gt;addFieldMapping('path', '');
-//$this-&gt;addFieldMapping('pathauto', '');
-$this-&gt;addFieldMapping('field_photo', 'meta_value');
-$this-&gt;addFieldMapping('field_photo:source_dir')
-     -&gt;defaultValue('/Users/aendrew/Sites/mn_wp');
-$this-&gt;addFieldMapping('field_photo:preserve_files')
-     -&gt;defaultValue(true);
-$this-&gt;addFieldMapping('field_photo:destination_file', 'meta_value');
-$this-&gt;addFieldMapping('field_photo:file_replace')
-     -&gt;defaultValue(MigrateFile::FILE_EXISTS_REUSE);
-$this-&gt;addFieldMapping('field_photo:alt', 'artist_name');
-$this-&gt;addFieldMapping('field_photo:title', 'artist_name');
-$this-&gt;addFieldMapping('field_links', 'artist_social_links')
-     -&gt;description('See prepare()'); //Needs to be unserialized
-$this-&gt;addFieldMapping('field_genres', 'genres')
-      -&gt;separator(',')
-      -&gt;arguments(array('create_term' =&gt; true));
-</code></pre>
-
-<p>  }</p>
-
-<p>  public function prepareRow($row) {</p>
-
-<pre><code>//Prepare Thumbnails
-$thumb = trim($row-&gt;meta_value);
-//watchdog('migrate', 'Filename is ' . $thumb);
-$row-&gt;meta_value = 'wp-content/uploads/' . $thumb;
-</code></pre>
-
-<p>  }</p>
-
-<p>  public function prepare(stdClass $node, stdClass $row) {</p>
-
-<pre><code>//Set up the links
-$links = unserialize($row-&gt;artist_social_links);
-$empty = 'a:10:{s:13:"artist_flickr";s:0:"";s:14:"artist_youtube";s:0:"";s:12:"artist_vimeo";s:0:"";s:15:"artist_facebook";s:0:"";s:14:"artist_twitter";s:0:"";s:13:"artist_lastfm";s:0:"";s:14:"artist_myspace";s:0:"";s:15:"artist_bandcamp";s:0:"";s:13:"artist_tumblr";s:0:"";s:19:"artist_reverbnation";s:0:"";}';
-if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
-  unset($node-&gt;field_links);
-} else {
-  $i = 0;
-  foreach ($links as $site =&gt; $link) {
-    if (!empty($link)) {
-      $site_name = ucfirst(str_replace('artist_', '', $site));
-      if ($site_name == "Youtube") $site_name = "YouTube";
-      if ($site_name == "Lastfm") $site_name = "Last.fm";
-      if ($site_name == "Youtube") $site_name = "YouTube";
-      if ($site_name == "Myspace") $site_name = "MySpace";
-      $node-&gt;field_links[LANGUAGE_NONE][$i]['title'] = $site_name;
-      $node-&gt;field_links[LANGUAGE_NONE][$i]['url'] = urldecode($link);
-      $i++;
-    }
-  }
-}
-</code></pre>
-
-<p>  }
-}
-~~~</p>
 
 <p>Did this help you out? Have I saved you a tonne of time? Please leave me a comment letting me know!</p>
 ]]></content>
@@ -225,9 +395,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[PodSix lives!]]></title>
-    <link href="http://aendrew.github.io/blog/2013/03/11/podsix-lives/"/>
+    <link href="http://aendrew.github.io/content/podsix-lives/"/>
     <updated>2013-03-11T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/03/11/podsix-lives</id>
+    <id>http://aendrew.github.io/content/podsix-lives</id>
     <content type="html"><![CDATA[<p>After Minehost went belly-up, the communal Minecraft server I played on went dead —and stayed dead — for about 6 months. However, I have revived it, on brand spanking new hardway and several major iterations of Minecraft later! Not only that, but it&rsquo;s running the bad-assery that is Tekkit Lite, which means you can do crazy things like build automated mining robots, write simple computer programs <strong>in-game</strong>, harness the power of volcanoes, <strong><em>even create whole new dimensions via books like in Myst.</em></strong></p>
 
 <p>Seriously, I have no idea why it took me so long to get on top of Tekkit. That shiz&rsquo;s cray.</p>
@@ -238,9 +408,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[New project: GitHub Pages for Drupal 7 (Also: I'm Git vetted!)]]></title>
-    <link href="http://aendrew.github.io/blog/2013/03/10/new-project-github-pages-drupal-7-also-im-git-vetted/"/>
+    <link href="http://aendrew.github.io/content/new-project-github-pages-drupal-7-also-im-git-vetted/"/>
     <updated>2013-03-10T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/03/10/new-project-github-pages-drupal-7-also-im-git-vetted</id>
+    <id>http://aendrew.github.io/content/new-project-github-pages-drupal-7-also-im-git-vetted</id>
     <content type="html"><![CDATA[<p>Over the last few months working with Drupal, I&rsquo;ve wanted to become a more productive member of the community. To that end, I&rsquo;ve been working on getting a full project approved in order to get &ldquo;Git vetted&rdquo; and thus be able to create full projects on Drupal.org.</p>
 
 <p><a href="http://drupal.org/node/1914740">A bunch of work, six code reviews and a boatload of PAReview&#8217;ing later</a>, I now have full project access and have started by creating GitHub Pages, which allows users to post copies of individual nodes to <a href="http://pages.github.com">GitHub&rsquo;s free HTML page hosting service</a>. This is a core bit of functionality for <a href="http://vizcloud.org">VizCloud</a>, intended to reduce server load on high-traffic nodes (For instance, a data visualization embedded in a news article).</p>
@@ -253,9 +423,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[New project: OpenMusicFestival]]></title>
-    <link href="http://aendrew.github.io/blog/2013/02/18/new-project-openmusicfestival/"/>
+    <link href="http://aendrew.github.io/content/new-project-openmusicfestival/"/>
     <updated>2013-02-18T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/02/18/new-project-openmusicfestival</id>
+    <id>http://aendrew.github.io/content/new-project-openmusicfestival</id>
     <content type="html"><![CDATA[<p>OpenMusicFestival is a Drupal distribution enabling music festivals of all sizes to create a rich, semantically-enabled website. Functionality includes extensive artist listings (Complete with Soundcloud and YouTube streams), schedules, venue listings — and because it&rsquo;s Drupal, more functionality like ticket sales and forums are only a module installation away.</p>
 
 <p><a href="http://openmusicfestival.com">OpenMusicFestival.com</a>
@@ -268,9 +438,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[Help me launch Visualization on groups.drupal.org!]]></title>
-    <link href="http://aendrew.github.io/blog/2013/01/24/help-me-launch-visualization-groupsdrupalorg/"/>
+    <link href="http://aendrew.github.io/content/help-me-launch-visualization-groupsdrupalorg/"/>
     <updated>2013-01-24T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/01/24/help-me-launch-visualization-groupsdrupalorg</id>
+    <id>http://aendrew.github.io/content/help-me-launch-visualization-groupsdrupalorg</id>
     <content type="html"><![CDATA[<p>I&rsquo;m trying to start a group on G.D.O dedicated to <a href="http://groups.drupal.org/visualization">visualization with Drupal</a>. We need more members and activity before being promoted to a full group — if interested, please join!</p>
 
 <h2><a href="http://groups.drupal.org/visualization">groups.drupal.org/visualization</a></h2>
@@ -279,9 +449,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[New project: VizCloud]]></title>
-    <link href="http://aendrew.github.io/blog/2013/01/23/new-project-vizcloud/"/>
+    <link href="http://aendrew.github.io/content/new-project-vizcloud/"/>
     <updated>2013-01-23T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/01/23/new-project-vizcloud</id>
+    <id>http://aendrew.github.io/content/new-project-vizcloud</id>
     <content type="html"><![CDATA[<p>In my ongoing quest to make a non-Java-based ManyEyes clone, I have launched VizCloud, a Drupal distribution intended to allow simple dataset upload and visualization construction. I pretty much have the dataset parts down (Provided and maintained via SocialCalc through <a href="http://drupal.org/project/sheetnode">Sheetnode</a>, though I&rsquo;m currently still developing the visualization aspect (Provided via d3.js — anyone with experience creating models in d3, please get back to me!).</p>
 
 <h2><a href="http://vizcloud.org">VizCloud.org</a></h2>
@@ -294,9 +464,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[New project: DrupalInstaller.kdapp]]></title>
-    <link href="http://aendrew.github.io/blog/2013/01/15/new-project-drupalinstallerkdapp/"/>
+    <link href="http://aendrew.github.io/content/new-project-drupalinstallerkdapp/"/>
     <updated>2013-01-15T00:00:00+00:00</updated>
-    <id>http://aendrew.github.io/blog/2013/01/15/new-project-drupalinstallerkdapp</id>
+    <id>http://aendrew.github.io/content/new-project-drupalinstallerkdapp</id>
     <content type="html"><![CDATA[<p>Use <a href="http://www.koding.com">Koding.com</a>? Want to install Drupal — with Drush — really easily? Now you can, with my snazzy new Drupal Installer app. Just add it to your account&rsquo;s apps via GitHub and you&rsquo;ll have both a way to deploy Drupal in under 5 minutes, but also a control panel to manage your various sites.</p>
 
 <p>Free cloud-based Drupal website hosting? Yes, please!</p>
@@ -307,9 +477,9 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[Economist: Sinodependency Treemap]]></title>
-    <link href="http://aendrew.github.io/blog/2012/11/04/economist-sinodependency-treemap/"/>
+    <link href="http://aendrew.github.io/content/economist-sinodependency-treemap/"/>
     <updated>2012-11-04T20:04:01+00:00</updated>
-    <id>http://aendrew.github.io/blog/2012/11/04/economist-sinodependency-treemap</id>
+    <id>http://aendrew.github.io/content/economist-sinodependency-treemap</id>
     <content type="html"><![CDATA[<p>For another treemap I did for <a href="http://www.economist.com">The Economist</a>, I mapped dependency of how exposed various S&amp;P500 companies are to declining investment in China.</p>
 
 <p>See: <a href="http://www.economist.com/blogs/graphicdetail/2012/09/sinodependency-index">http://www.economist.com/blogs/graphicdetail/2012/09/sinodependency-index</a></p>
@@ -318,27 +488,30 @@ if ($node-&gt;field_links[LANGUAGE_NONE][0]['url'] == $empty) {
   
   <entry>
     <title type="html"><![CDATA[Economist: Olympic Medal Map]]></title>
-    <link href="http://aendrew.github.io/blog/2012/11/04/economist-olympic-medal-map/"/>
+    <link href="http://aendrew.github.io/content/economist-olympic-medal-map/"/>
     <updated>2012-11-04T20:01:42+00:00</updated>
-    <id>http://aendrew.github.io/blog/2012/11/04/economist-olympic-medal-map</id>
+    <id>http://aendrew.github.io/content/economist-olympic-medal-map</id>
     <content type="html"><![CDATA[<p>For a project I did for the Economist, I created a treemap script that could be easily updated via Google Spreadsheets every day, allowing a running tally of Olympics medals for each country and event.</p>
 
-<p>Day 1: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-1-0">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-1-0</a>
-Day 2: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-2">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-2</a>
-Day 3: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-3">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-3</a>
-Day 4: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-4">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-4</a>
-Day 5: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-5">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-5</a>
-Day 6: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-6">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-6</a>
-Day 7: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-7">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-7</a>
-Day 8: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-8">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-8</a>
-Day 9: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-9">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-9</a>
-Day 10: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-10">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-10</a>
-Day 11: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-11">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-11</a>
-Day 12: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-12">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-12</a>
-Day 13: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-13">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-13</a>
-Day 14: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-14">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-14</a>
-Day 15: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-15">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-15</a>
-Day 16: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-16">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-16</a></p>
+<ul>
+<li>Day 1: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-1-0">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-1-0</a></li>
+<li>Day 2: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-2">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-2</a></li>
+<li>Day 3: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-3">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-3</a></li>
+<li>Day 4: <a href="http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-4">http://www.economist.com/blogs/graphicdetail/2012/07/olympic-medal-map-day-4</a></li>
+<li>Day 5: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-5">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-5</a></li>
+<li>Day 6: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-6">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-6</a></li>
+<li>Day 7: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-7">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-7</a></li>
+<li>Day 8: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-8">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-8</a></li>
+<li>Day 9: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-9">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-9</a></li>
+<li>Day 10: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-10">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-10</a></li>
+<li>Day 11: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-11">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-11</a></li>
+<li>Day 12: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-12">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-12</a></li>
+<li>Day 13: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-13">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-13</a></li>
+<li>Day 14: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-14">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-14</a></li>
+<li>Day 15: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-15">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-15</a></li>
+<li>Day 16: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-16">http://www.economist.com/blogs/graphicdetail/2012/08/olympic-medal-map-day-16</a></li>
+</ul>
+
 
 <p>The treemap was created via <a href="http://thejit.org/">The Javascript Infoviz Toolkit</a>, with Google Spreadsheet data <a href="http://www.ravelrumba.com/blog/json-google-spreadsheets/">pushed via PHP</a>.</p>
 ]]></content>
@@ -346,9 +519,9 @@ Day 16: <a href="http://www.economist.com/blogs/graphicdetail/2012/08/olympic-me
   
   <entry>
     <title type="html"><![CDATA[MA Project: Rainfall at UK music festivals]]></title>
-    <link href="http://aendrew.github.io/blog/2012/07/08/ma-project-rainfall-uk-music-festivals/"/>
+    <link href="http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals/"/>
     <updated>2012-07-08T15:37:37+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/07/08/ma-project-rainfall-uk-music-festivals</id>
+    <id>http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals</id>
     <content type="html"><![CDATA[<p>For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via <a href="http://festivals.aendrew.com/sparql">RDF/Sparql</a>. <a href="http://festivals.aendrew.com">Visit the result here.</a> What follows is the article that accompanied it.</p>
 
 <hr />
@@ -491,9 +664,9 @@ When Wellies are mandatory</p>
   
   <entry>
     <title type="html"><![CDATA[Interesting quote from Kenneth Clarke's Leveson Inquiry testimony]]></title>
-    <link href="http://aendrew.github.io/blog/2012/06/14/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony/"/>
+    <link href="http://aendrew.github.io/content/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony/"/>
     <updated>2012-06-14T15:37:28+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/06/14/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony</id>
+    <id>http://aendrew.github.io/content/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony</id>
     <content type="html"><![CDATA[<p>I found this particularly illuminating:</p>
 
 <blockquote><p>I think a lot of the criminal justice legislation of recent years has been a response to popular newspaper complaints. It&rsquo;s not wholly new, and the popular press have always tended to be&mdash;&ndash; made a great virtue of ever toughter policies on law and order, and I don&rsquo;t know a politician who isn&rsquo;t in favour of tough policies on law and order, but there has been a wave of ever more noisy campaigns, either following high profile criminal cases or whatever, demanding ever tougher sentences from an ever wider range of crimes, to which government and Parliament seems to me to have most readily conceded.</p>
@@ -514,9 +687,9 @@ When Wellies are mandatory</p>
   
   <entry>
     <title type="html"><![CDATA[About]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/29/about/"/>
+    <link href="http://aendrew.github.io/content/about/"/>
     <updated>2012-05-29T16:14:13+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/29/about</id>
+    <id>http://aendrew.github.io/content/about</id>
     <content type="html"><![CDATA[<p>This is the blog and portfolio of Ændrew Rininsland, London-based Canadian expat multinerd.</p>
 
 <p>I use <a href="https://plus.google.com/106103742843933159103">Google+</a>. Woo.</p>
@@ -527,9 +700,9 @@ When Wellies are mandatory</p>
   
   <entry>
     <title type="html"><![CDATA[Waiting for TfL: bus punctuality on Transport for London's network]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/25/waiting-tfl-bus-punctuality-transport-londons-network/"/>
+    <link href="http://aendrew.github.io/content/waiting-tfl-bus-punctuality-transport-londons-network/"/>
     <updated>2012-05-25T19:22:34+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/25/waiting-tfl-bus-punctuality-transport-londons-network</id>
+    <id>http://aendrew.github.io/content/waiting-tfl-bus-punctuality-transport-londons-network</id>
     <content type="html"><![CDATA[<p>Londoners collectively spent an estimated 36 million hours waiting for late buses in 2011, data revealed through FOI has shown. That means every man, woman and child in London spent over four and a half hours waiting for late buses last year alone.</p>
 
 <p>According to Transport for London’s quality of service indicators, excess waiting time (EWT) on TfL’s high frequency routes averaged 57 seconds per passenger journey between January 2011 and 2012. On a whole, roughly one minute per bus might not seem very much — however, it really adds up when multiplied over the 2.3 billion bus journeys made per year alone.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
@@ -590,9 +763,9 @@ When Wellies are mandatory</p>
   
   <entry>
     <title type="html"><![CDATA[New project: n0tice for WordPress]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/21/n0tice/"/>
+    <link href="http://aendrew.github.io/content/n0tice/"/>
     <updated>2012-05-21T23:59:45+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/21/n0tice</id>
+    <id>http://aendrew.github.io/content/n0tice</id>
     <content type="html"><![CDATA[<p><a href="http://www.n0tice.com">n0tice</a> is a hyperlocal, community-driven news, events and classifieds website brought to you by <a href="http://www.guardian.co.uk">The Guardian</a>.</p>
 
 <p>This plugin is designed to pull content from specific locales and/or n0ticeboards, allowing it to be curated for display on a WordPress blog.</p>
@@ -607,9 +780,9 @@ When Wellies are mandatory</p>
   
   <entry>
     <title type="html"><![CDATA[Media Law Exam Review Session 2]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/16/media-law-exam-review-session-2/"/>
+    <link href="http://aendrew.github.io/content/media-law-exam-review-session-2/"/>
     <updated>2012-05-16T18:38:01+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/16/media-law-exam-review-session-2</id>
+    <id>http://aendrew.github.io/content/media-law-exam-review-session-2</id>
     <content type="html"><![CDATA[<p><strong>Note: I wasn&rsquo;t able to attend the second revision section, but listened through the audio recording on Moodle.</strong></p>
 
 <h2>Media law Examination 2011</h2>
@@ -1021,9 +1194,9 @@ d. The Copyright court
   
   <entry>
     <title type="html"><![CDATA[Media Law Exam Review Session 1]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/14/media-law-exam-review-session-1/"/>
+    <link href="http://aendrew.github.io/content/media-law-exam-review-session-1/"/>
     <updated>2012-05-14T17:21:15+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/14/media-law-exam-review-session-1</id>
+    <id>http://aendrew.github.io/content/media-law-exam-review-session-1</id>
     <content type="html"><![CDATA[<h3>Note: These may be somewhat scattered and incomplete, same caveat with all my notes &mdash;  Battle moves really quickly through this stuff. Also, apologies for any spelling errors.</h3>
 
 <ul>
@@ -1088,9 +1261,9 @@ d. The Copyright court
   
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Simon Rogers]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-simon-rogers/"/>
+    <link href="http://aendrew.github.io/content/evolving-newsroom-qa-simon-rogers/"/>
     <updated>2012-05-08T17:11:51+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-simon-rogers</id>
+    <id>http://aendrew.github.io/content/evolving-newsroom-qa-simon-rogers</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. Next I&rsquo;ve spoken with Simon Rogers, Editor at the <a href="http://guardian.co.uk">Guardian</a>&rsquo;s <a href="http://guardian.co.uk/data">Data Store</a> and <a href="http://guardian.co.uk/news/datablog">Data Blog</a>.</em></p>
 
 <p>Ændrew Rininsland: To start with, would you mind describing a typical workday?</p>
@@ -1173,9 +1346,9 @@ d. The Copyright court
   
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Paul Bradshaw]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-paul-bradshaw/"/>
+    <link href="http://aendrew.github.io/content/evolving-newsroom-qa-paul-bradshaw/"/>
     <updated>2012-05-08T17:08:16+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-paul-bradshaw</id>
+    <id>http://aendrew.github.io/content/evolving-newsroom-qa-paul-bradshaw</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. This time I&rsquo;ve interviewed Paul Bradshaw, Editor at the <a href="http://onlinejournalismblog.com">Online Journalism Blog</a> and lecturer at <a href="http://www.city.ac.uk">City University London</a>.</em></p>
 
 <p>Ændrew Rininsland: You said at one point that universities aren’t producing very many journalists going into Computer Assisted Reporting (CAR). Why do you think that is?</p>
@@ -1206,9 +1379,9 @@ d. The Copyright court
   
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Aron Pilhofer]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-aron-pilhofer/"/>
+    <link href="http://aendrew.github.io/content/evolving-newsroom-qa-aron-pilhofer/"/>
     <updated>2012-05-08T17:06:03+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-aron-pilhofer</id>
+    <id>http://aendrew.github.io/content/evolving-newsroom-qa-aron-pilhofer</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. Next, I&rsquo;ve talked with Aron Pilhofer, Editor of Interactive News at the <a href="http://www.nytimes.com">New York Times</a>.</em></p>
 
 <p>Ændrew Rininsland: Could you describe a typical workday?</p>
@@ -1275,9 +1448,9 @@ d. The Copyright court
   
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Conrad Quilty-Harper]]></title>
-    <link href="http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-conrad-quilty-harper/"/>
+    <link href="http://aendrew.github.io/content/evolving-newsroom-qa-conrad-quilty-harper/"/>
     <updated>2012-05-08T17:02:57+01:00</updated>
-    <id>http://aendrew.github.io/blog/2012/05/08/evolving-newsroom-qa-conrad-quilty-harper</id>
+    <id>http://aendrew.github.io/content/evolving-newsroom-qa-conrad-quilty-harper</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. To start things off, I&rsquo;ve talked to Conrad Quilty-Harper, who is the Interactive News Editor for the Telegraph.</em></p>
 
 <p>Ændrew Rininsland: You’d written for Engadget before, what was it like going from a technology website to a traditional newspaper?</p>
