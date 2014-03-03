@@ -4,7 +4,7 @@ title: "MA Project: Rainfall at UK music festivals"
 date: 2012-07-08 14:37:37
 ---
 
-For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via [RDF/Sparql](http://festivals.aendrew.com/sparql). [Visit the result here.](http://festivals.aendrew.com) What follows is the article that accompanied it.
+For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via [RDF/Sparql](http://festivals.aendrew.com/sparql). [Visit the result here.](http://festivals.aendrew.com) What follows is the article that accompanied it. <!-- more -->
 
 ---
 ## Rainfall at UK music festivals, or, How I Learned to Stop Worrying and Love The Rain

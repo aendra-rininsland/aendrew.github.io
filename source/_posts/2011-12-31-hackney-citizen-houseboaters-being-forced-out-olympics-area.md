@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hackney Citizen: "Houseboaters being 'forced out' from Olympics area""
+title: "Hackney Citizen: \"Houseboaters being 'forced out' from Olympics area\""
 date: 2011-12-31 17:02:27
 ---
 

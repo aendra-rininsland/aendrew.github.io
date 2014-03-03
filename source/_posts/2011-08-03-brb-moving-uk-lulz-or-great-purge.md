@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "BRB moving to UK, lulz (Or, "The Great Purge")"
+title: "BRB moving to UK, lulz (Or, \"The Great Purge\")"
 date: 2011-08-03 20:49:54
 ---
 

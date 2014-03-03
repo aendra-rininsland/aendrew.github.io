@@ -8,7 +8,7 @@ The reason I created [OpenMusicFestival](http://www.openmusicfestival.com) in th
 
 While I suspect my original use of WordTour for a music festival was slightly weird (The system was designed for small record labels, but relationship between artists, events and venues made it work for my purposes), I'm releasing my Artist migration class in case somebody finds it useful and wants to migrate to OpenMusicFestival. Note that this only migrates Artists — the Event and Venues parts are incomplete (On that note, if somebody wants to do those, I'll happily both give you credit on the project as well as include the code with OMF.).
 
-~~~
+```php migrate_wordtour.php
 <?php
 /**
  * @file
@@ -191,6 +191,6 @@ class ArtistMigration extends WordTourMigration {
     }
   }
 }
-~~~
+```
 
 Did this help you out? Have I saved you a tonne of time? Please leave me a comment letting me know!
