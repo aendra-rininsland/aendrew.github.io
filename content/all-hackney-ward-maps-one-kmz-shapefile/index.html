@@ -22,6 +22,7 @@
 
   <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="/stylesheets/aendrew.css" media="screen, projection" rel="stylesheet" type="text/css">
 
 
   <script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
@@ -328,7 +329,20 @@
 
 
 
-
+<script type="text/javascript" src="/javascripts/vegas/dist/jquery.vegas.min.js"></script>
+<script type="text/javascript">
+  (function($){
+    $.vegas(
+      {
+        src: 'images/onions.jpg',
+        fade: 1000
+      }
+    )('overlay', 
+      {
+        src: 'javascripts/vegas/dist/overlays/01.png'
+      });
+  })(jQuery)
+</script>
 
   </body>
 </html>
