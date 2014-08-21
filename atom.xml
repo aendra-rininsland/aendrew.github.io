@@ -4,7 +4,7 @@
   <title><![CDATA[aendrew.com]]></title>
   <link href="http://aendrew.github.io/atom.xml" rel="self"/>
   <link href="http://aendrew.github.io/"/>
-  <updated>2014-05-10T15:49:59+01:00</updated>
+  <updated>2014-08-20T19:54:00-06:00</updated>
   <id>http://aendrew.github.io/</id>
   <author>
     <name><![CDATA[Ændrew Rininsland]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My last year at The Times and Sunday Times]]></title>
     <link href="http://aendrew.github.io/content/my-year-at-the-times/"/>
-    <updated>2014-05-07T15:00:00+01:00</updated>
+    <updated>2014-05-07T15:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/my-year-at-the-times</id>
     <content type="html"><![CDATA[<p>This is the portfolio post to accompany my Tumblog post about my previous year
 at The Times and Sunday Times. Go <a href="http://aendrew.tumblr.com/post/85034300107/my-first-year-at-the-times-and-sunday-times">here</a> to read my more general commentary.</p>
@@ -73,7 +73,7 @@ subscription to access it.</p>
   <entry>
     <title type="html"><![CDATA[aendrew.com version 5]]></title>
     <link href="http://aendrew.github.io/content/aendrew-dot-com-version-5/"/>
-    <updated>2014-03-03T00:12:33+00:00</updated>
+    <updated>2014-03-02T18:12:33-06:00</updated>
     <id>http://aendrew.github.io/content/aendrew-dot-com-version-5</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been a long time in coming, but I&rsquo;ve finally migrated from Drupal 7 to
 the static HTML-generating powerhouse that is Octopress. This is admittedly
@@ -118,7 +118,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[Migrate from WordTour to OpenMusicFestival]]></title>
     <link href="http://aendrew.github.io/content/migrate-wordtour-openmusicfestival/"/>
-    <updated>2013-04-09T12:45:53+01:00</updated>
+    <updated>2013-04-09T05:45:53-06:00</updated>
     <id>http://aendrew.github.io/content/migrate-wordtour-openmusicfestival</id>
     <content type="html"><![CDATA[<p>The reason I created <a href="http://www.openmusicfestival.com">OpenMusicFestival</a> in the first place was so that I could migrate <a href="http://www.motionnotion.com">MotionNotion.com</a> from WordPress (And its unsupported WordTour plugin) to Drupal 7.</p>
 
@@ -498,7 +498,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[PodSix lives!]]></title>
     <link href="http://aendrew.github.io/content/podsix-lives/"/>
-    <updated>2013-03-11T00:00:00+00:00</updated>
+    <updated>2013-03-10T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/podsix-lives</id>
     <content type="html"><![CDATA[<p>After Minehost went belly-up, the communal Minecraft server I played on went dead —and stayed dead — for about 6 months. However, I have revived it, on brand spanking new hardway and several major iterations of Minecraft later! Not only that, but it&rsquo;s running the bad-assery that is Tekkit Lite, which means you can do crazy things like build automated mining robots, write simple computer programs <strong>in-game</strong>, harness the power of volcanoes, <strong><em>even create whole new dimensions via books like in Myst.</em></strong></p>
 
@@ -511,7 +511,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[New project: GitHub Pages for Drupal 7 (Also: I'm Git vetted!)]]></title>
     <link href="http://aendrew.github.io/content/new-project-github-pages-drupal-7-also-im-git-vetted/"/>
-    <updated>2013-03-10T00:00:00+00:00</updated>
+    <updated>2013-03-09T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/new-project-github-pages-drupal-7-also-im-git-vetted</id>
     <content type="html"><![CDATA[<p>Over the last few months working with Drupal, I&rsquo;ve wanted to become a more productive member of the community. To that end, I&rsquo;ve been working on getting a full project approved in order to get &ldquo;Git vetted&rdquo; and thus be able to create full projects on Drupal.org.</p>
 
@@ -526,7 +526,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[New project: OpenMusicFestival]]></title>
     <link href="http://aendrew.github.io/content/new-project-openmusicfestival/"/>
-    <updated>2013-02-18T00:00:00+00:00</updated>
+    <updated>2013-02-17T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/new-project-openmusicfestival</id>
     <content type="html"><![CDATA[<p>OpenMusicFestival is a Drupal distribution enabling music festivals of all sizes to create a rich, semantically-enabled website. Functionality includes extensive artist listings (Complete with Soundcloud and YouTube streams), schedules, venue listings — and because it&rsquo;s Drupal, more functionality like ticket sales and forums are only a module installation away.</p>
 
@@ -541,7 +541,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[Help me launch Visualization on groups.drupal.org!]]></title>
     <link href="http://aendrew.github.io/content/help-me-launch-visualization-groupsdrupalorg/"/>
-    <updated>2013-01-24T00:00:00+00:00</updated>
+    <updated>2013-01-23T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/help-me-launch-visualization-groupsdrupalorg</id>
     <content type="html"><![CDATA[<p>I&rsquo;m trying to start a group on G.D.O dedicated to <a href="http://groups.drupal.org/visualization">visualization with Drupal</a>. We need more members and activity before being promoted to a full group — if interested, please join!</p>
 
@@ -552,7 +552,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[New project: VizCloud]]></title>
     <link href="http://aendrew.github.io/content/new-project-vizcloud/"/>
-    <updated>2013-01-23T00:00:00+00:00</updated>
+    <updated>2013-01-22T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/new-project-vizcloud</id>
     <content type="html"><![CDATA[<p>In my ongoing quest to make a non-Java-based ManyEyes clone, I have launched VizCloud, a Drupal distribution intended to allow simple dataset upload and visualization construction. I pretty much have the dataset parts down (Provided and maintained via SocialCalc through <a href="http://drupal.org/project/sheetnode">Sheetnode</a>, though I&rsquo;m currently still developing the visualization aspect (Provided via d3.js — anyone with experience creating models in d3, please get back to me!).</p>
 
@@ -567,7 +567,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[New project: DrupalInstaller.kdapp]]></title>
     <link href="http://aendrew.github.io/content/new-project-drupalinstallerkdapp/"/>
-    <updated>2013-01-15T00:00:00+00:00</updated>
+    <updated>2013-01-14T18:00:00-06:00</updated>
     <id>http://aendrew.github.io/content/new-project-drupalinstallerkdapp</id>
     <content type="html"><![CDATA[<p>Use <a href="http://www.koding.com">Koding.com</a>? Want to install Drupal — with Drush — really easily? Now you can, with my snazzy new Drupal Installer app. Just add it to your account&rsquo;s apps via GitHub and you&rsquo;ll have both a way to deploy Drupal in under 5 minutes, but also a control panel to manage your various sites.</p>
 
@@ -580,7 +580,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[Economist: Sinodependency Treemap]]></title>
     <link href="http://aendrew.github.io/content/economist-sinodependency-treemap/"/>
-    <updated>2012-11-04T20:04:01+00:00</updated>
+    <updated>2012-11-04T14:04:01-06:00</updated>
     <id>http://aendrew.github.io/content/economist-sinodependency-treemap</id>
     <content type="html"><![CDATA[<p>For another treemap I did for <a href="http://www.economist.com">The Economist</a>, I mapped dependency of how exposed various S&amp;P500 companies are to declining investment in China.</p>
 
@@ -591,7 +591,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[Economist: Olympic Medal Map]]></title>
     <link href="http://aendrew.github.io/content/economist-olympic-medal-map/"/>
-    <updated>2012-11-04T20:01:42+00:00</updated>
+    <updated>2012-11-04T14:01:42-06:00</updated>
     <id>http://aendrew.github.io/content/economist-olympic-medal-map</id>
     <content type="html"><![CDATA[<p>For a project I did for the Economist, I created a treemap script that could be easily updated via Google Spreadsheets every day, allowing a running tally of Olympics medals for each country and event.</p>
 
@@ -622,7 +622,7 @@ with any luck I can find the right balance to make both worthwhile.</p>
   <entry>
     <title type="html"><![CDATA[MA Project: Rainfall at UK music festivals]]></title>
     <link href="http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals/"/>
-    <updated>2012-07-08T15:37:37+01:00</updated>
+    <updated>2012-07-08T08:37:37-06:00</updated>
     <id>http://aendrew.github.io/content/ma-project-rainfall-uk-music-festivals</id>
     <content type="html"><![CDATA[<p>For my MA project, I compiled a massive database of popular outdoor British music festivals and cross-referenced that with Met Office weather data. I then fed this into a Drupal install to make it all fancy and consumable via <a href="http://festivals.aendrew.com/sparql">RDF/Sparql</a>. <a href="http://festivals.aendrew.com">Visit the result here.</a> What follows is the article that accompanied it. <!-- more --></p>
 
@@ -767,7 +767,7 @@ When Wellies are mandatory</p>
   <entry>
     <title type="html"><![CDATA[Interesting quote from Kenneth Clarke's Leveson Inquiry testimony]]></title>
     <link href="http://aendrew.github.io/content/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony/"/>
-    <updated>2012-06-14T15:37:28+01:00</updated>
+    <updated>2012-06-14T08:37:28-06:00</updated>
     <id>http://aendrew.github.io/content/interesting-quote-kenneth-clarkes-leveson-inquiry-testimony</id>
     <content type="html"><![CDATA[<p>I found this particularly illuminating:</p>
 
@@ -790,7 +790,7 @@ When Wellies are mandatory</p>
   <entry>
     <title type="html"><![CDATA[About]]></title>
     <link href="http://aendrew.github.io/content/about/"/>
-    <updated>2012-05-29T16:14:13+01:00</updated>
+    <updated>2012-05-29T09:14:13-06:00</updated>
     <id>http://aendrew.github.io/content/about</id>
     <content type="html"><![CDATA[<p>This is the blog and portfolio of Ændrew Rininsland, London-based Canadian expat multinerd.</p>
 
@@ -803,7 +803,7 @@ When Wellies are mandatory</p>
   <entry>
     <title type="html"><![CDATA[Waiting for TfL: bus punctuality on Transport for London's network]]></title>
     <link href="http://aendrew.github.io/content/waiting-tfl-bus-punctuality-transport-londons-network/"/>
-    <updated>2012-05-25T19:22:34+01:00</updated>
+    <updated>2012-05-25T12:22:34-06:00</updated>
     <id>http://aendrew.github.io/content/waiting-tfl-bus-punctuality-transport-londons-network</id>
     <content type="html"><![CDATA[<p>Londoners collectively spent an estimated 36 million hours waiting for late buses in 2011, data revealed through FOI has shown. That means every man, woman and child in London spent over four and a half hours waiting for late buses last year alone.</p>
 
@@ -866,7 +866,7 @@ When Wellies are mandatory</p>
   <entry>
     <title type="html"><![CDATA[New project: n0tice for WordPress]]></title>
     <link href="http://aendrew.github.io/content/n0tice/"/>
-    <updated>2012-05-21T23:59:45+01:00</updated>
+    <updated>2012-05-21T16:59:45-06:00</updated>
     <id>http://aendrew.github.io/content/n0tice</id>
     <content type="html"><![CDATA[<p><a href="http://www.n0tice.com">n0tice</a> is a hyperlocal, community-driven news, events and classifieds website brought to you by <a href="http://www.guardian.co.uk">The Guardian</a>.</p>
 
@@ -883,7 +883,7 @@ When Wellies are mandatory</p>
   <entry>
     <title type="html"><![CDATA[Media Law Exam Review Session 2]]></title>
     <link href="http://aendrew.github.io/content/media-law-exam-review-session-2/"/>
-    <updated>2012-05-16T18:38:01+01:00</updated>
+    <updated>2012-05-16T11:38:01-06:00</updated>
     <id>http://aendrew.github.io/content/media-law-exam-review-session-2</id>
     <content type="html"><![CDATA[<p><strong>Note: I wasn&rsquo;t able to attend the second revision section, but listened through the audio recording on Moodle.</strong></p>
 
@@ -1297,7 +1297,7 @@ d. The Copyright court
   <entry>
     <title type="html"><![CDATA[Media Law Exam Review Session 1]]></title>
     <link href="http://aendrew.github.io/content/media-law-exam-review-session-1/"/>
-    <updated>2012-05-14T17:21:15+01:00</updated>
+    <updated>2012-05-14T10:21:15-06:00</updated>
     <id>http://aendrew.github.io/content/media-law-exam-review-session-1</id>
     <content type="html"><![CDATA[<h3>Note: These may be somewhat scattered and incomplete, same caveat with all my notes &mdash;  Battle moves really quickly through this stuff. Also, apologies for any spelling errors.</h3>
 
@@ -1364,7 +1364,7 @@ d. The Copyright court
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Simon Rogers]]></title>
     <link href="http://aendrew.github.io/content/evolving-newsroom-qa-simon-rogers/"/>
-    <updated>2012-05-08T17:11:51+01:00</updated>
+    <updated>2012-05-08T10:11:51-06:00</updated>
     <id>http://aendrew.github.io/content/evolving-newsroom-qa-simon-rogers</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. Next I&rsquo;ve spoken with Simon Rogers, Editor at the <a href="http://guardian.co.uk">Guardian</a>&rsquo;s <a href="http://guardian.co.uk/data">Data Store</a> and <a href="http://guardian.co.uk/news/datablog">Data Blog</a>.</em></p>
 
@@ -1449,7 +1449,7 @@ d. The Copyright court
   <entry>
     <title type="html"><![CDATA[The Evolving Newsroom: Q&A with Paul Bradshaw]]></title>
     <link href="http://aendrew.github.io/content/evolving-newsroom-qa-paul-bradshaw/"/>
-    <updated>2012-05-08T17:08:16+01:00</updated>
+    <updated>2012-05-08T10:08:16-06:00</updated>
     <id>http://aendrew.github.io/content/evolving-newsroom-qa-paul-bradshaw</id>
     <content type="html"><![CDATA[<p><em>The Evolving Newsroom is a series of Q&amp;As with important names in the data journalism field, discussing how the newsroom is evolving to better incorporate data and data-driven journalism. This time I&rsquo;ve interviewed Paul Bradshaw, Editor at the <a href="http://onlinejournalismblog.com">Online Journalism Blog</a> and lecturer at <a href="http://www.city.ac.uk">City University London</a>.</em></p>
 
