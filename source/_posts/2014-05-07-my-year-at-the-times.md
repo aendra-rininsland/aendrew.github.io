@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My last year at The Times and Sunday Times"
+title: "My year at The Times and Sunday Times"
 date: 2014-05-07 15:00
 ---
 
