@@ -1,0 +1,79 @@
+@mixin party {
+    animation-name: party-on;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@mixin party-fg {
+    animation-name: party-on-fg;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.party {
+  @include party-fg();
+}
+
+.headroom {
+  background-color: lightgrey;
+  &:hover {
+    @include party();
+  }
+}
+
+
+@keyframes party-on {
+  0% {
+    background-color: #fece7a;
+  }
+  12% {
+    background-color: #7eff7a;
+  }
+  24% {
+    background-color: #7effff;
+  }
+  36% {
+    background-color: #7ba3fe;
+  }
+  48% {
+    background-color: #cb70fe;
+  }
+  60% {
+    background-color: #fc49f5;
+  }
+  78% {
+    background-color: #fc4ea7;
+  }
+  90% {
+    background-color: #fd5258;
+  }
+}
+
+@keyframes party-on-fg {
+  0% {
+    color: #fece7a;
+  }
+  12% {
+    color: #7eff7a;
+  }
+  24% {
+    color: #7effff;
+  }
+  36% {
+    color: #7ba3fe;
+  }
+  48% {
+    color: #cb70fe;
+  }
+  60% {
+    color: #fc49f5;
+  }
+  78% {
+    color: #fc4ea7;
+  }
+  90% {
+    color: #fd5258;
+  }
+}
