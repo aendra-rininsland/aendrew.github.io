@@ -1,11 +1,12 @@
 import React, { PropTypes } from "react"
 import Helmet from "react-helmet"
 import warning from "warning"
+import CursorPosition from 'react-cursor-position';
 import { BodyContainer, joinUri, Link } from "phenomic"
 
 import Button from "../../components/Button"
 import Loading from "../../components/Loading"
-import { getRandomHeaderImage } from "../../components/Header";
+import {TrippyBars} from '../../components/Trippy';
 
 import styles from "./index.css"
 
@@ -51,8 +52,6 @@ const Page = (
     { name: "description", content: head.description },
   ]
 
-  const hero = head.hero || getRandomHeaderImage();
-
   return (
     <div className={ styles.page }>
       <Helmet
@@ -60,12 +59,10 @@ const Page = (
         meta={ meta }
       />
       {
-        <div
-          className={ styles.hero }
-          style={{ background: `#111 url(${ hero }) 50% 50% / cover`}}
-        >
-          <div className={ styles.header }>
-            <div className={ styles.wrapper }>
+        <div className={ styles.header }>
+          <CursorPosition>
+            <TrippyBars width={window.innerWidth} height={300}>
+              <div className={ styles.wrapper }>
               <h1 className={ styles.heading }>{ head.title }</h1>
               {
                 head.cta &&
@@ -75,8 +72,9 @@ const Page = (
                   </Button>
                 </Link>
               }
-            </div>
-          </div>
+              </div>
+            </TrippyBars>
+          </CursorPosition>
         </div>
       }
       <div className={ styles.wrapper + " " + styles.pageContent }>
