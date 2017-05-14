@@ -1,21 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components'
+import { connect } from 'react-redux';
+import styles from './index.css';
 
-export function TrippyBars({width, height, cursorPosition, children}) {
+function TrippyBars({width, height, children, currX}) {
   const numBars = width > 1000 ? 50 : width > 500 ? 50 : 10;
   const barWidth = width / numBars;
-  // const barHeight = (i) => Math.sqrt(height * (Math.abs(((i * barWidth) + barWidth / 2) - cursorPosition.x)) * 3);
-  const barHeight = (i) => height / Math.sqrt(Math.abs(((i * barWidth) + barWidth / 2) - cursorPosition.x)) * 5;
-  const Overlay = styled.div`
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: ${height}px;
-    width: ${width}px;
-    display: flex;
-    justify-content: center;
-  `;
+  const barHeight = (i) => height / Math.sqrt(Math.abs(((i * barWidth) + barWidth / 2) - currX)) * 5;
+
   return (
     <section className="trippy bars">
       <svg width={width} height={height} style={{marginBottom: '-5px'}}>
@@ -24,17 +16,18 @@ export function TrippyBars({width, height, cursorPosition, children}) {
             <rect
               key={i}
               x={i * barWidth}
-              y={height - barHeight(i)}
+              y={!~[-Infinity, Infinity].indexOf(barHeight(i)) ? height - barHeight(i): 0}
               width={barWidth}
-              height={barHeight(i)}
+              height={!~[-Infinity, Infinity].indexOf(barHeight(i)) ? barHeight(i) : height}
               fill="tomato"
+              stroke="black"
             />
           ))
         }
       </svg>
-      <Overlay>
+      <div className={styles.overlay} style={{width: `${width}px`, height: `${height}px`}}>
         {children}
-      </Overlay>
+      </div>
     </section>
   );
 }
@@ -42,6 +35,12 @@ export function TrippyBars({width, height, cursorPosition, children}) {
 TrippyBars.propTypes = {
   width:  propTypes.number.isRequired,
   height: propTypes.number.isRequired,
-  cursorPosition: propTypes.object,
   children: propTypes.node,
+  currX: propTypes.number,
 };
+
+export default connect((state) => {
+  return {
+    currX: state.mouseMove.x,
+  };
+})(TrippyBars);

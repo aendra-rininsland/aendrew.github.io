@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: "My year at The Times and Sunday Times"
+title: "My first year at The Times and Sunday Times"
 date: 2014-05-07 15:00
 ---
 
@@ -17,24 +17,24 @@ subscription to access it.
 
 ## [Syria: The Road from Damascus to Hell](http://thetim.es/syrianconflict) (£)
 
-{% img center /images/syria.png 600 400 'image' 'images' %}
+![Syria: The Road from Damascus to Hell](/assets/syria.png)
 
 + Built Google Docs-based API backend; implemented AngularJS frontend.
 
 ## [The Con Artists](http://www.thesundaytimes.co.uk/sto/Magazine/article1394727.ece) (£)
 
-{% img center /images/conartists.png 600 400 'image' 'images' %}
+![Image](/assets/conartists.png)
 
 + Built the underlying WordPress-based CMS technology; helped with production.
 
 ## [My Year with Malala](http://www.thesundaytimes.co.uk/sto/public/myyearwithmalala/)
 
-{% img center /images/malala.png 600 400 'image' 'images' %}
+![Image](/assets/malala.png)
 
 + Built the underlying WordPress-based CMS technology; helped with production.
 
 ## [Life of Mandela](http://thetim.es/lifeofmandela)
 
-{% img center /images/mandela.png 600 400 'image' 'images' %}
+![Image](/assets/mandela.png)
 
 + Built the Google Docs-based backend and Twitter Bootstrap frontend; helped at every stage of production.

@@ -1,12 +1,12 @@
 import React, { PropTypes } from "react"
 import Helmet from "react-helmet"
 import warning from "warning"
-import CursorPosition from 'react-cursor-position';
 import { BodyContainer, joinUri, Link } from "phenomic"
 
 import Button from "../../components/Button"
 import Loading from "../../components/Loading"
-import {TrippyBars} from '../../components/Trippy';
+import TrippyBars from '../../components/Trippy';
+// import FeedReader from '../../components/FeedReader';
 
 import styles from "./index.css"
 
@@ -60,21 +60,19 @@ const Page = (
       />
       {
         <div className={ styles.header }>
-          <CursorPosition>
-            <TrippyBars width={window.innerWidth} height={300}>
-              <div className={ styles.wrapper }>
-              <h1 className={ styles.heading }>{ head.title }</h1>
-              {
-                head.cta &&
-                <Link to={ head.cta.link }>
-                  <Button className={ styles.cta } light { ...head.cta.props }>
-                    { head.cta.label }
-                  </Button>
-                </Link>
-              }
-              </div>
-            </TrippyBars>
-          </CursorPosition>
+          <TrippyBars width={window.innerWidth - 15} height={300}>
+            <div className={ styles.wrapper }>
+            <h1 className={ styles.heading }>{ head.title }</h1>
+            {
+              head.cta &&
+              <Link to={ head.cta.link }>
+                <Button className={ styles.cta } light { ...head.cta.props }>
+                  { head.cta.label }
+                </Button>
+              </Link>
+            }
+            </div>
+          </TrippyBars>
         </div>
       }
       <div className={ styles.wrapper + " " + styles.pageContent }>

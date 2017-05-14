@@ -9,16 +9,39 @@ import headerImages from "./header-images.json";
 
 import styles from "./index.css"
 
+const topLevelLinks = [
+  {
+    path: "/",
+    label: "About",
+  },
+  {
+    path: "/blog",
+    label: "Blog",
+  },
+  {
+    path: "/projects",
+    label: "Projects",
+  },
+  {
+    path: "/contact",
+    label: "Contact"
+  }
+]
+
+
 const Header = (props, { metadata: { pkg } }) => (
   <header className={ styles.header }>
     <nav className={ styles.nav }>
       <div className={ styles.navPart1 }>
-        <Link
-          className={ styles.link }
-          to={ "/" }
-        >
-          { "Home" }
-        </Link>
+        {topLevelLinks.map(item => (
+          <Link
+            key={item.label.toLowerCase()}
+            className={ styles.link }
+            to={item.path}
+          >
+            {item.label}
+          </Link>
+        ))}
       </div>
       <div className={ styles.navPart2 }>
           <a

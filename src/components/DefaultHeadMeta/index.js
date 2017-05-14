@@ -18,6 +18,12 @@ const DefaultHeadMeta = (props, { metadata: { pkg } }) => (
         "?features=es6&flags=gated" },
         ...props.scripts ? props.scripts : [],
       ] }
+      link={ [
+        { // Google Fonts
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css?family=Alice|Questrial',
+        }
+      ] }
     />
 
     { /* meta viewport safari/chrome/edge */ }

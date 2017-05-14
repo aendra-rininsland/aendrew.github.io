@@ -39,6 +39,7 @@
 }
 
 .heading {
+  font-family: Questrial, sans-serif;
   color: var(--colorNeutralLight);
   text-shadow:
     0 0 10px var(--colorPrimaryDark),
@@ -49,6 +50,7 @@
 }
 
 .cta {
+  font-family: Questrial, sans-serif;
   margin-top: 2rem;
 }
 
