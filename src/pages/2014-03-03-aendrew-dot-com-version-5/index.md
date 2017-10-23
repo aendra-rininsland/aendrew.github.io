@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "aendrew.com version 5"
+path: "content/aendrew-dot-com-version-5"
 date: 2014-03-03 00:12:33 +0000
 comments: true
-categories: 
+categories:
 ---
 
 It's been a long time in coming, but I've finally migrated from Drupal 7 to
@@ -24,7 +25,7 @@ times a year, the likelihood of having out-of-date code online is rather high.
 
 That'd be the main reason, beyond the fact I never really needed the raw power
 that Drupal was able to provide. Yes, I tried making a "resume" content type
-at one point, but it wasn't any easier to keep maintained than my LinkedIn 
+at one point, but it wasn't any easier to keep maintained than my LinkedIn
 account or the public Google Doc I sent as a PDF when I was still looking for
 work.
 
@@ -35,7 +36,7 @@ way of going back through my work and visualising the changes I've made over
 time. The hope is I can start publishing to my blog more regularly, as well as
 using it as a place to workshop writing.
 
-Admittedly the theme needs a bit more work, but it's nice to be back in 
+Admittedly the theme needs a bit more work, but it's nice to be back in
 Bootstrap Country.
 
 I still think aendrew.com itself will always be more of portfolio site while my
