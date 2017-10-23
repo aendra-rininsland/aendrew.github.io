@@ -9,15 +9,14 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import store from './store';
-import {
-  updateCurrX,
-  // updateFeedItems,
-} from './actions';
+import { updateCurrX, updateFeedItems } from './actions';
 import { Provider } from 'react-redux';
 
 document.onmousemove = e => {
   store.dispatch(updateCurrX(e.pageX));
 }
+
+store.dispatch(updateFeedItems());
 
 const AppContainer = (props) => (
   <Provider store={store}>

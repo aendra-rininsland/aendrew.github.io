@@ -11,9 +11,9 @@ export const updateCurrX = (x) => ({
 });
 
 export const updateFeedItems = () => (dispatch) =>
-  fetch('https://www.ft.com/%C3%A6ndrew-rininsland?format=json')
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.ft.com/%C3%A6ndrew-rininsland?format=rss')
   .then(res => res.json())
-  .then((items) => dispatch({
+  .then((res) => dispatch({
     type: UPDATE_FEED_ITEMS,
-    items,
+    items: res.items,
   }));

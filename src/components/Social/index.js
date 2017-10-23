@@ -38,12 +38,12 @@ const items = [
 
 export default function SocialLinks() {
   return (
-    <aside>
-      <h2>Elsewhere online</h2>
-      <ul>
+    <aside className={ styles['container'] }>
+      <h2 className={ styles.heading }>Elsewhere online</h2>
+      <ul className={ styles.list }>
         {
-          items.map(item =>
-            <li>
+          items.map((item, idx) =>
+            <li key={idx}>
               <a href={item.url}>
                 <img src={item.icon} className={styles.icon} />
                 {item.label}

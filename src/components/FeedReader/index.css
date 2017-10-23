@@ -1,0 +1,39 @@
+.feed-reader {
+  flex: 1;
+}
+
+ul.feed-reader {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  list-style: none;
+}
+
+h2.feed-reader {
+  text-align: center;
+}
+
+.feed-reader--item {
+  padding: 1rem;
+}
+
+.feed-reader--item__title {
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.feed-reader--item__pub-date {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  display: block;
+}
+
+.feed-reader--item__read-more {
+  display: inline-flex;
+  margin-top: 1rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-bottom: 0 !important;
+  text-decoration: none !important;
+}

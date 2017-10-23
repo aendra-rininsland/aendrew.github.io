@@ -2,7 +2,7 @@
 title: ændrew.com v8
 layout: Homepage
 cta:
-  label: London-based journalist/code-artist
+  label: London-based journalist/developer
   link: "about"
 ---
 

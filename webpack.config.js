@@ -44,7 +44,7 @@ export default (config = {}) => {
           },
         },
 
-        // *.js => babel + eslint
+        // *.js => babel
         {
           test: /\.js$/,
           include: [
@@ -53,7 +53,6 @@ export default (config = {}) => {
           ],
           loaders: [
             "babel-loader?cacheDirectory",
-            "eslint-loader" + (config.dev ? "?emitWarning" : ""),
           ],
         },
 

@@ -1,14 +1,13 @@
-import React, { PropTypes } from "react"
-import Helmet from "react-helmet"
-import warning from "warning"
-import { BodyContainer, joinUri, Link } from "phenomic"
+import React, { PropTypes } from "react";
+import Helmet from "react-helmet";
+import warning from "warning";
+import { BodyContainer, joinUri, Link } from "phenomic";
 
-import Button from "../../components/Button"
-import Loading from "../../components/Loading"
+import Button from "../../components/Button";
+import Loading from "../../components/Loading";
 import TrippyBars from '../../components/Trippy';
-// import FeedReader from '../../components/FeedReader';
 
-import styles from "./index.css"
+import styles from "./index.css";
 
 const Page = (
   {

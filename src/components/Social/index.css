@@ -1,0 +1,13 @@
+.container {
+  flex: none;
+  margin-right: 2rem;
+  order: -1;
+}
+
+.heading {
+  padding: 0;
+}
+
+.list {
+  padding-left: 1rem;
+}
