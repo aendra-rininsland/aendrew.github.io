@@ -1,6 +1,7 @@
-# node / npm
-node_modules
-*.log
-
-# phenomic build
-dist
+node_modules/
+public
+.gatsby-context.js
+.DS_Store
+.intermediate-representation/
+.cache/
+yarn.lock
