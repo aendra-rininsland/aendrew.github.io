@@ -1,3 +1,6 @@
 [submodule "aendrewcom-content"]
 	path = aendrewcom-content
 	url = keybase://private/aendrew/aendrewcom-content
+[submodule "src/pages"]
+	path = src/pages
+	url = keybase://private/aendrew/aendrewcom-content
