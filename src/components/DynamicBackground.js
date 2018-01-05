@@ -1,0 +1,125 @@
+/**
+ * Dynamic background built in P5.js
+ * Ported and modified from the BouncyBubbles Processing demo
+ */
+
+import p5 from 'p5'
+import React, { Component } from 'react'
+
+class DynamicBackground extends Component {
+  constructor(props) {
+    super(props)
+    this.width = 400 //window.innerWidth
+    this.height = 400 //window.innerHeight
+    this.numBalls = 12
+    this.spring = 0.05
+    this.gravity = 0.03
+    this.friction = -0.9
+    this.instantiate = this.instantiate.bind(this)
+  }
+
+  instantiate(ref) {
+    this.p5 = new p5(this.sketch.bind(this), ref)
+  }
+
+  sketch(p) {
+    let numBalls = this.numBalls
+    let spring = this.spring
+    let gravity = this.gravity
+    let friction = this.friction
+    let width = this.width
+    let height = this.height
+
+    p.setup = () => {
+      p.createCanvas(width, height)
+      this.balls = Array(numBalls)
+        .fill(null)
+        .map(
+          (d, i, a) =>
+            new Ball(p.random(width), p.random(height), p.random(30, 70), i)
+        )
+      p.noStroke()
+      p.fill(0, 204)
+    }
+
+    p.draw = () => {
+      p.background(255)
+      for (let ball of this.balls) {
+        ball.collide(this.balls)
+        ball.move(this.balls)
+        ball.display()
+      }
+    }
+
+    class Ball {
+      constructor(xin, yin, din, idin) {
+        this.vx = 0
+        this.vy = 0
+        this.x = xin
+        this.y = yin
+        this.diameter = din
+        this.id = idin
+      }
+
+      collide(balls) {
+        for (let i = this.id + 1; i < numBalls; i++) {
+          let dx = balls[i].x - this.x
+          let dy = balls[i].y - this.y
+          let distance = p.sqrt(dx * dx + dy * dy)
+          let minDist = balls[i].diameter / 2 + this.diameter / 2
+          if (distance < minDist) {
+            let angle = p.atan2(dy, dx)
+            let targetX = this.x + p.cos(angle) * minDist
+            let targetY = this.y + p.sin(angle) * minDist
+            let ax = (targetX - balls[i].x) * spring
+            let ay = (targetY - balls[i].y) * spring
+            this.vx -= ax
+            this.vy -= ay
+            balls[i].vx += ax
+            balls[i].vy += ay
+          }
+        }
+      }
+
+      move(balls) {
+        this.vy += gravity
+        this.x += this.vx
+        this.y += this.vy
+        if (this.x + this.diameter / 2 > width) {
+          this.x = width - this.diameter / 2
+          this.vx *= friction
+        } else if (this.x - this.diameter / 2 < 0) {
+          this.x = this.diameter / 2
+          this.vx *= friction
+        }
+
+        if (this.y + this.diameter / 2 > height) {
+          this.y = height - this.diameter / 2
+          this.vy *= friction
+        } else if (this.y - this.diameter / 2 < 0) {
+          this.y = this.diameter / 2
+          this.vy *= friction
+        }
+      }
+
+      display() {
+        p.ellipse(this.x, this.y, this.diameter, this.diameter)
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.instantiate()
+  }
+
+  componentDidUpdate() {
+    p.remove()
+    this.instantiate()
+  }
+
+  render() {
+    return <div ref={canvas => (this.canvas = canvas)} />
+  }
+}
+
+export default DynamicBackground

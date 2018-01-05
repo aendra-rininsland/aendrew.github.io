@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import { Container } from 'react-responsive-grid'
-
+import DynamicBackground from '../components/DynamicBackground'
 import { rhythm, scale } from '../utils/typography'
 
 const Template = ({ location, children }) => {
@@ -62,6 +62,7 @@ const Template = ({ location, children }) => {
         padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
       }}
     >
+      <DynamicBackground />
       {header}
       {children()}
     </Container>
