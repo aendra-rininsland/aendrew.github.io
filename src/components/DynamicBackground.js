@@ -10,7 +10,6 @@ class DynamicBackground extends Component {
   constructor(props) {
     super(props)
     this.width = 37.44 * 16
-    this.height = window.innerHeight
     this.numBalls = 12
     this.spring = 0.05
     this.gravity = 0.0001
@@ -110,6 +109,7 @@ class DynamicBackground extends Component {
   }
 
   componentDidMount() {
+    this.height = window.innerHeight
     this.instantiate()
   }
 
