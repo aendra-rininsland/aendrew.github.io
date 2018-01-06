@@ -12,7 +12,7 @@ const Bio = () => (
   <div
     style={{
       display: 'flex',
-      marginBottom: rhythm(2.5),
+      marginBottom: rhythm(1.5),
     }}
   >
     <img
@@ -21,8 +21,8 @@ const Bio = () => (
       style={{
         marginRight: rhythm(1 / 2),
         marginBottom: 0,
-        width: rhythm(2),
-        height: rhythm(2),
+        width: rhythm(1.5),
+        height: rhythm(1.5),
       }}
     />
     <Social />

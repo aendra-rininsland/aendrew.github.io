@@ -2,6 +2,15 @@ import Typography from 'typography'
 import ThemeMoraga from 'typography-theme-moraga'
 
 ThemeMoraga.overrideThemeStyles = () => ({
+  a: {
+    color: 'rgba(255, 82, 82, 0.83)',
+  },
+  h3: {
+    marginBottom: 0,
+  },
+  'small.date': {
+    color: 'darkgrey',
+  },
   'a.gatsby-resp-image-link': {
     boxShadow: 'none',
   },

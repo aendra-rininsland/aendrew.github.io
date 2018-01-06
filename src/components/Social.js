@@ -6,6 +6,7 @@ import SoundCloud from 'react-icons/lib/fa/soundcloud'
 import Instagram from 'react-icons/lib/fa/instagram'
 import FTLogo from './ft-icon'
 import Tinder from './tinder-icon'
+import { rhythm } from '../utils/typography'
 
 // Import typefaces
 import 'typeface-montserrat'
@@ -55,7 +56,7 @@ const Social = props => {
       {platforms.map((item, idx) => (
         <a
           key={idx}
-          style={{ fontSize: '3em' }}
+          style={{ fontSize: rhythm(1.5) }}
           href={item.url}
           title={item.title}
         >

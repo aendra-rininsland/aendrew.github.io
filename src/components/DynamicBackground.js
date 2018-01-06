@@ -9,17 +9,18 @@ import React, { Component } from 'react'
 class DynamicBackground extends Component {
   constructor(props) {
     super(props)
-    this.width = 400 //window.innerWidth
-    this.height = 400 //window.innerHeight
+    this.width = 37.44 * 16
+    this.height = window.innerHeight
     this.numBalls = 12
     this.spring = 0.05
-    this.gravity = 0.03
+    this.gravity = 0.0001
     this.friction = -0.9
     this.instantiate = this.instantiate.bind(this)
   }
 
-  instantiate(ref) {
-    this.p5 = new p5(this.sketch.bind(this), ref)
+  instantiate(reinit = false) {
+    if (reinit) this.p5.remove()
+    this.p5 = new p5(this.sketch.bind(this), this.canvas)
   }
 
   sketch(p) {
@@ -39,7 +40,7 @@ class DynamicBackground extends Component {
             new Ball(p.random(width), p.random(height), p.random(30, 70), i)
         )
       p.noStroke()
-      p.fill(0, 204)
+      p.fill(0, 10)
     }
 
     p.draw = () => {
@@ -113,12 +114,22 @@ class DynamicBackground extends Component {
   }
 
   componentDidUpdate() {
-    p.remove()
-    this.instantiate()
+    this.instantiate(true)
   }
 
   render() {
-    return <div ref={canvas => (this.canvas = canvas)} />
+    return (
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: -99,
+          height: 0,
+          width: 0,
+        }}
+        ref={canvas => (this.canvas = canvas)}
+      />
+    )
   }
 }
 
