@@ -31,6 +31,7 @@ class DynamicBackground extends Component {
 
     p.setup = () => {
       p.createCanvas(width, height)
+      // p.blendMode(p.BLEND)
       this.balls = Array(numBalls)
         .fill(null)
         .map(
@@ -44,13 +45,13 @@ class DynamicBackground extends Component {
             )
         )
       p.noStroke()
-      p.fill(0, 10)
+      p.fill(255, 82, 82, 83)
     }
 
     p.draw = () => {
       p.background(255)
       for (let ball of this.balls) {
-        ball.collide(this.balls)
+        ball.collide(this.balls, 2.5)
         ball.move(this.balls)
         ball.display()
       }
@@ -66,12 +67,13 @@ class DynamicBackground extends Component {
         this.id = idin
       }
 
-      collide(balls) {
+      collide(balls, bumpFactor = 2) {
         for (let i = this.id + 1; i < numBalls; i++) {
           let dx = balls[i].x - this.x
           let dy = balls[i].y - this.y
           let distance = p.sqrt(dx * dx + dy * dy)
-          let minDist = balls[i].diameter / 2 + this.diameter / 2
+          let minDist =
+            balls[i].diameter / bumpFactor + this.diameter / bumpFactor
           if (distance < minDist) {
             let angle = p.atan2(dy, dx)
             let targetX = this.x + p.cos(angle) * minDist
