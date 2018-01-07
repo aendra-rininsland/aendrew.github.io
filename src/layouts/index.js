@@ -34,6 +34,7 @@ const Template = ({ location, children }) => {
       </h1>
     )
   } else {
+    // Interior page
     header = (
       <h3
         style={{
@@ -46,7 +47,7 @@ const Template = ({ location, children }) => {
           style={{
             boxShadow: 'none',
             textDecoration: 'none',
-            color: 'inherit',
+            color: 'rgba(255, 82, 82, 0.83)',
           }}
           to={'/'}
         >
@@ -56,16 +57,20 @@ const Template = ({ location, children }) => {
     )
   }
   return (
-    <Container
-      style={{
-        maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
+    <div>
       <DynamicBackground />
-      {header}
-      {children()}
-    </Container>
+      <Container
+        style={{
+          maxWidth: rhythm(24),
+          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          margin: '0 auto',
+          background: 'white',
+        }}
+      >
+        {header}
+        {children()}
+      </Container>
+    </div>
   )
 }
 

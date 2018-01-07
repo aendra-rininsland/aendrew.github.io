@@ -34,16 +34,16 @@ const Social = props => {
       icon: <LinkedIn />,
       url: 'https://www.linkedin.com/in/aendrew/',
     },
-    {
-      title: 'SoundCloud',
-      icon: <SoundCloud />,
-      url: 'https://soundcloud.com/aendrew',
-    },
-    {
-      title: 'Instagram',
-      icon: <Instagram />,
-      url: 'https://instagram.com/aendrewdotcom',
-    },
+    // {
+    //   title: 'SoundCloud',
+    //   icon: <SoundCloud />,
+    //   url: 'https://soundcloud.com/aendrew',
+    // },
+    // {
+    //   title: 'Instagram',
+    //   icon: <Instagram />,
+    //   url: 'https://instagram.com/aendrewdotcom',
+    // },
     // {
     //   title: 'Tinder?!lol',
     //   icon: <Tinder />,
@@ -56,7 +56,10 @@ const Social = props => {
       {platforms.map((item, idx) => (
         <a
           key={idx}
-          style={{ fontSize: rhythm(1.5) }}
+          style={{
+            fontSize:
+              item.title === 'Financial Times' ? rhythm(1.3) : rhythm(1.5),
+          }}
           href={item.url}
           title={item.title}
         >

@@ -20,6 +20,7 @@ const BlogPostTemplate = props => {
           display: 'block',
           marginBottom: rhythm(1),
           marginTop: rhythm(-1),
+          color: 'darkgrey',
         }}
       >
         {post.frontmatter.date}

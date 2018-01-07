@@ -9,10 +9,9 @@ import React, { Component } from 'react'
 class DynamicBackground extends Component {
   constructor(props) {
     super(props)
-    this.width = 37.44 * 16
-    this.numBalls = 12
+    this.numBalls = 40
     this.spring = 0.05
-    this.gravity = 0.0001
+    this.gravity = 0
     this.friction = -0.9
     this.instantiate = this.instantiate.bind(this)
   }
@@ -36,7 +35,13 @@ class DynamicBackground extends Component {
         .fill(null)
         .map(
           (d, i, a) =>
-            new Ball(p.random(width), p.random(height), p.random(30, 70), i)
+            new Ball(
+              p.random(width),
+              p.random(height),
+              p.random(30, 70),
+              i,
+              0.01
+            )
         )
       p.noStroke()
       p.fill(0, 10)
@@ -52,9 +57,9 @@ class DynamicBackground extends Component {
     }
 
     class Ball {
-      constructor(xin, yin, din, idin) {
-        this.vx = 0
-        this.vy = 0
+      constructor(xin, yin, din, idin, iv = 0) {
+        this.vx = iv
+        this.vy = iv
         this.x = xin
         this.y = yin
         this.diameter = din
@@ -110,6 +115,7 @@ class DynamicBackground extends Component {
 
   componentDidMount() {
     this.height = window.innerHeight
+    this.width = window.innerWidth
     this.instantiate()
   }
 
@@ -123,6 +129,7 @@ class DynamicBackground extends Component {
         style={{
           position: 'sticky',
           top: 0,
+          left: 0,
           zIndex: -99,
           height: 0,
           width: 0,
