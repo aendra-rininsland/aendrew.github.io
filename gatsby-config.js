@@ -12,6 +12,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-google-sheets`,
+      options: {
+        spreadsheetKey: `1ec1bO25bbEL4pdZjhlV3AppMtnO65D0ZI8fXy4z47Dw`,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
