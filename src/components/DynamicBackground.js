@@ -121,13 +121,10 @@ class DynamicBackground extends Component {
     this.instantiate()
   }
 
-  componentDidUpdate() {
-    this.instantiate(true)
-  }
-
   render() {
     return (
       <div
+        id="dynamic-background"
         style={{
           position: 'sticky',
           top: 0,
