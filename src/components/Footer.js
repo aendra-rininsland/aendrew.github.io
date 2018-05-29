@@ -10,10 +10,6 @@ export default () => (
     }}
   >
     © {new Date().getFullYear()} Ændrew Rininsland, except where otherwise
-    noted. <br />
-    Ændrew would like to thank{' '}
-    <a href="https://twitter.com/naomipgreen">Naomi Prescod-Green</a> for a
-    tremendous number of design and content suggestions over the course of this
-    site's development.
+    noted.
   </div>
 )
