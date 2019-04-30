@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/aendrew
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.aendrew.com
+  * I am aendrew (https://keybase.io/aendrew) on keybase.
+  * I have a public key ASAWtPRPXPYgT82ExIXhXgAf1bis-bY3y0ufhXonmg2SEQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101b8ef6a61fcb8bfa29b52df9d4a586a42a071a5f5c4bb4833edca1a769415ee530a",
+      "host": "keybase.io",
+      "kid": "012016b4f44f5cf6204fcd84c485e15e001fd5b8acf9b637cb4b9f857a279a0d92110a",
+      "uid": "f47cd640a0f3bd2495df980f0e900400",
+      "username": "aendrew"
+    },
+    "merkle_root": {
+      "ctime": 1556633199,
+      "hash": "8d1010adc3378080703ad4e562da4dd44c3172d8fd7a4f40d1e87efe57381a6a1dec011e13f531c3f3556289ca1b7d8479d49aa996642099896b39087356b51d",
+      "hash_meta": "aa2ed9fdc60174907e0258fda061b3b5311799622446458ca5b4a16b6e0b02e9",
+      "seqno": 5270037
+    },
+    "service": {
+      "entropy": "U9sWsWFlb/3FGe2TZBXHuoKY",
+      "hostname": "www.aendrew.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "3.2.2"
+  },
+  "ctime": 1556633218,
+  "expire_in": 504576000,
+  "prev": "704a313ef5bbfecf77083bf6d89afa4d7fa5db91e681a589d7f7aee3202333d6",
+  "seqno": 96,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgFrT0T1z2IE/NhMSF4V4AH9W4rPm2N8tLn4V6J5oNkhEKp3BheWxvYWTESpcCYMQgcEoxPvW7/s93CDv22Jr6TX+l25HmgaWJ1/eu4yAjM9bEICcOaSG/XVE4Ld268KT77D3frS5q/JhuRKfIpSM/42+HAgHCo3NpZ8RAeToAb/lJtUJTkET2giuolgY+INKQzgUoZd5BBW8rFDXvp/HZ3JAOubKIviN80cIEjeCPYQQ6Go7a4HpV370hCKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIO5nByQbd97ICEP1GtoHJ+m3/kQ/cYLyXHTv2HO+ZT2lo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/aendrew
+
+==================================================================
